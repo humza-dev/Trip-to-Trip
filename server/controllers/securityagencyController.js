@@ -64,6 +64,12 @@ exports.read = (req, res) => {
   });
 };
 
+exports.readall = (req, res) => {
+  SecurityAgency.find({}).then((agencies) => {
+    res.status(200).send(agencies);
+  });
+};
+
 exports.update = (req, res) => {
   SecurityAgency.findOneAndUpdate(
     { _id: req.params.userID },

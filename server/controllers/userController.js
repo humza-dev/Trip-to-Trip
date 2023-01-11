@@ -62,3 +62,8 @@ exports.read = (req, res) => {
     res.send(user);
   });
 };
+exports.readall = (req, res) => {
+  User.find({}).then((users) => {
+    res.status(201).send(users);
+  });
+};

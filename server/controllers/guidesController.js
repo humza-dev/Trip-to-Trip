@@ -69,6 +69,15 @@ exports.read = (req, res) => {
     res.send(guide);
   });
 };
+
+exports.readall = (req, res) => {
+  Guides.find({}).then((guide) => {
+    req.body.photo = undefined;
+    req.body.guidelicense = undefined;
+    res.status(201).send(guide);
+  });
+};
+
 exports.update = (req, res) => {
   Guides.findOneAndUpdate(
     { _id: req.params.userID },

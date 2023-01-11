@@ -66,6 +66,12 @@ exports.read = (req, res) => {
   });
 };
 
+exports.readall = (req, res) => {
+  TravelAgency.find({}).then((users) => {
+    res.send(users);
+  });
+};
+
 exports.update = (req, res) => {
   TravelAgency.findOneAndUpdate(
     { _id: req.params.userID },
