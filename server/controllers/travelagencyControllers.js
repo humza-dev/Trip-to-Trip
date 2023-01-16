@@ -55,15 +55,20 @@ exports.signout = (req, res) => {
   res.json({ message: "signed out successfully" });
 };
 
-exports.read = (req, res) => {
-  TravelAgency.findById({ _id: req.params.userID }).exec((err, agency) => {
-    if (err || !agency) {
-      res.status(400).send("travel agency not found");
+exports.read = async (req, res) => {
+  try {
+    const travelagency = await TravelAgency.findOne({
+      _id: req.params.userID,
+    });
+
+    if (!travelagency) {
+      return res.status(404).send("travelagency doesn't exist");
     }
 
-    agency.password = undefined;
-    res.status(201).send(agency);
-  });
+    res.send(travelagency);
+  } catch (error) {
+    res.status(500).send("Internal server error");
+  }
 };
 
 exports.readall = (req, res) => {
@@ -87,12 +92,18 @@ exports.update = (req, res) => {
     }
   );
 };
-exports.remove = (req, res) => {
-  TravelAgency.findByIdAndDelete({ _id: req.params.userID }, (err, agency) => {
-    if (err || !agency) {
-      res.status(400).send("Travel agency not found!");
+exports.remove = async (req, res) => {
+  try {
+    const travelagency = await TravelAgency.findOneAndDelete({
+      _id: req.params.userID,
+    });
+
+    if (!travelagency) {
+      res.status(404).send("travelagency not found");
     }
 
-    res.send("Travel agency removed successfully");
-  });
+    res.send("travelagency removed successfully!");
+  } catch (e) {
+    res.status(500).send();
+  }
 };

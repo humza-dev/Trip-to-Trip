@@ -59,15 +59,21 @@ exports.signout = (req, res) => {
   res.clearCookie("t");
   res.json({ message: "signed out successfully" });
 };
-exports.read = (req, res) => {
-  const id = req.params.userID;
-  Guides.findById({ _id: id }).exec((err, guide) => {
-    if (err || !guide) {
-      res.status(404).send("Guide not found");
+
+exports.read = async (req, res) => {
+  try {
+    const guide = await Guides.findOne({
+      _id: req.params.userID,
+    });
+
+    if (!guide) {
+      return res.status(404).send("guide doesn't exist");
     }
-    guide.password = undefined;
+
     res.send(guide);
-  });
+  } catch (error) {
+    res.status(500).send("Internal server error");
+  }
 };
 
 exports.readall = (req, res) => {
@@ -92,11 +98,18 @@ exports.update = (req, res) => {
     }
   );
 };
-exports.remove = (req, res) => {
-  Guides.findByIdAndDelete({ _id: req.params.userID }, (err, guide) => {
-    if (err || !guide) {
-      res.status(404).send("Guide not found");
+exports.remove = async (req, res) => {
+  try {
+    const guide = await Guides.findOneAndDelete({
+      _id: req.params.userID,
+    });
+
+    if (!guide) {
+      res.status(404).send("guide not found");
     }
-    res.send("Guide removed successfully");
-  });
+
+    res.send("guide removed successfully!");
+  } catch (e) {
+    res.status(500).send();
+  }
 };

@@ -41,27 +41,39 @@ exports.update = (req, res) => {
     }
   );
 };
-exports.remove = (req, res) => {
-  User.findOneAndRemove({ _id: req.params.userID }, (err, user) => {
-    if (err) {
-      res.status(400).json(err);
-    }
-    res.send("User removed successfully");
-  });
-};
-exports.read = (req, res) => {
-  User.findById({ _id: req.params.userID }).exec((err, user) => {
-    if (err || !user) {
-      res.status(400).json({
-        err: "user not found",
-      });
+
+exports.remove = async (req, res) => {
+  try {
+    const user = await User.findOneAndDelete({
+      _id: req.params.userID,
+    });
+
+    if (!user) {
+      res.status(404).send("user not found");
     }
 
-    req.profile = user;
+    res.send("user removed successfully!");
+  } catch (e) {
+    res.status(500).send();
+  }
+};
+
+exports.read = async (req, res) => {
+  const id = req.params.userID;
+  try {
+    const user = await User.findById({ _id: id });
+
+    if (!user) {
+      res.status(404).send("tour not found");
+    }
+
     user.password = undefined;
     res.send(user);
-  });
+  } catch (e) {
+    res.status(500).send(e);
+  }
 };
+
 exports.readall = (req, res) => {
   User.find({}).then((users) => {
     res.status(201).send(users);

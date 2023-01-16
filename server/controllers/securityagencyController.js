@@ -53,15 +53,20 @@ exports.signout = (req, res) => {
   res.json({ message: "signed out successfully" });
 };
 
-exports.read = (req, res) => {
-  SecurityAgency.findById({ _id: req.params.userID }).exec((err, agency) => {
-    if (err || !agency) {
-      res.status(400).send("Security agency not found !");
+exports.read = async (req, res) => {
+  try {
+    const securityagency = await SecurityAgency.findOne({
+      _id: req.params.userID,
+    });
+
+    if (!securityagency) {
+      return res.status(404).send("securityagency doesn't exist");
     }
-    req.profile = agency;
-    agency.password = undefined;
-    res.send(agency);
-  });
+
+    res.send(securityagency);
+  } catch (error) {
+    res.status(500).send("Internal server error");
+  }
 };
 
 exports.readall = (req, res) => {
@@ -85,11 +90,18 @@ exports.update = (req, res) => {
   );
 };
 
-exports.remove = (req, res) => {
-  SecurityAgency.findOneAndDelete({ _id: req.params.userID }, (err, agency) => {
-    if (err || !agency) {
-      res.status(400).send("Security agency not found");
+exports.remove = async (req, res) => {
+  try {
+    const securityagency = await SecurityAgency.findOneAndDelete({
+      _id: req.params.userID,
+    });
+
+    if (!securityagency) {
+      res.status(404).send("securityagency not found");
     }
-    res.send("Security agency removed succesfully!");
-  });
+
+    res.send("securityagency removed successfully!");
+  } catch (e) {
+    res.status(500).send();
+  }
 };

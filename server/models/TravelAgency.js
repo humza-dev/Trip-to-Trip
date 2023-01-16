@@ -18,6 +18,16 @@ const TravelAgencyScheama = new mongoose.Schema(
       index: true,
     },
     password: { type: String, trim: true, required: true },
+    passwordConfirm: {
+      type: String,
+      required: [true, "Please confirm your password"],
+      validate: {
+        validator: function (el) {
+          return el === this.password;
+        },
+        message: "Passwords must match",
+      },
+    },
     address: { type: String, trim: true, required: true },
     phonenumber: { type: Number, trim: true, required: true },
     companylicense: { data: Buffer, contentType: String },
