@@ -1,0 +1,1335 @@
+{
+    "extension": "linecounter",
+    "version": "0.2.7",
+    "workspace": "c:\\work\\Trip to Trip",
+    "linecount": [
+        {
+            "version": "0.2.7",
+            "counttime": "2023-01-17 10:39:26",
+            "filesum": 29,
+            "codesum": 6881,
+            "commentsum": 17,
+            "blanksum": 130,
+            "statistics": {
+                ".js": {
+                    "code": 1250,
+                    "comment": 16,
+                    "blank": 128
+                },
+                ".json": {
+                    "code": 5626,
+                    "comment": 0,
+                    "blank": 2
+                },
+                "": {
+                    "code": 5,
+                    "comment": 1,
+                    "blank": 0
+                }
+            },
+            "filelist": [
+                {
+                    "filename": "frontend\\images\\icon.jpg",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 0,
+                    "code": 3,
+                    "comment": 1,
+                    "filename": "server\\.env"
+                },
+                {
+                    "blank": 0,
+                    "code": 2,
+                    "comment": 0,
+                    "filename": "server\\.gitignore"
+                },
+                {
+                    "blank": 12,
+                    "code": 113,
+                    "comment": 1,
+                    "filename": "server\\controllers\\guidesController.js"
+                },
+                {
+                    "blank": 17,
+                    "code": 153,
+                    "comment": 0,
+                    "filename": "server\\controllers\\guidetourControllers.js"
+                },
+                {
+                    "blank": 10,
+                    "code": 63,
+                    "comment": 0,
+                    "filename": "server\\controllers\\reviewController.js"
+                },
+                {
+                    "blank": 12,
+                    "code": 110,
+                    "comment": 0,
+                    "filename": "server\\controllers\\securityagencyController.js"
+                },
+                {
+                    "blank": 11,
+                    "code": 110,
+                    "comment": 0,
+                    "filename": "server\\controllers\\travelagencyControllers.js"
+                },
+                {
+                    "blank": 18,
+                    "code": 128,
+                    "comment": 12,
+                    "filename": "server\\controllers\\travelagencyTourController.js"
+                },
+                {
+                    "blank": 11,
+                    "code": 82,
+                    "comment": 0,
+                    "filename": "server\\controllers\\userController.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 10,
+                    "comment": 0,
+                    "filename": "server\\Database\\db.js"
+                },
+                {
+                    "blank": 6,
+                    "code": 31,
+                    "comment": 3,
+                    "filename": "server\\index.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 28,
+                    "comment": 0,
+                    "filename": "server\\models\\bookingGuide.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 45,
+                    "comment": 0,
+                    "filename": "server\\models\\guides.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 59,
+                    "comment": 0,
+                    "filename": "server\\models\\guideTour.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 25,
+                    "comment": 0,
+                    "filename": "server\\models\\review.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 36,
+                    "comment": 0,
+                    "filename": "server\\models\\SecurityAgency.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 36,
+                    "comment": 0,
+                    "filename": "server\\models\\TravelAgency.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 63,
+                    "comment": 0,
+                    "filename": "server\\models\\TravelAgencytour.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 37,
+                    "comment": 0,
+                    "filename": "server\\models\\users.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 5594,
+                    "comment": 0,
+                    "filename": "server\\package-lock.json"
+                },
+                {
+                    "blank": 0,
+                    "code": 32,
+                    "comment": 0,
+                    "filename": "server\\package.json"
+                },
+                {
+                    "blank": 2,
+                    "code": 19,
+                    "comment": 0,
+                    "filename": "server\\routes\\guidesRoutes.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 15,
+                    "comment": 0,
+                    "filename": "server\\routes\\guidetourRoutes.js"
+                },
+                {
+                    "blank": 3,
+                    "code": 15,
+                    "comment": 0,
+                    "filename": "server\\routes\\reviewRoutes.js"
+                },
+                {
+                    "blank": 3,
+                    "code": 19,
+                    "comment": 0,
+                    "filename": "server\\routes\\securityAgencyRoutes.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 19,
+                    "comment": 0,
+                    "filename": "server\\routes\\travelagencyRoutes.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 15,
+                    "comment": 0,
+                    "filename": "server\\routes\\travelAgencyTourRoutes.js"
+                },
+                {
+                    "blank": 3,
+                    "code": 19,
+                    "comment": 0,
+                    "filename": "server\\routes\\userRoutes.js"
+                }
+            ]
+        },
+        {
+            "version": "0.2.7",
+            "counttime": "2023-01-17 14:48:07",
+            "filesum": 29,
+            "codesum": 7750,
+            "commentsum": 29,
+            "blanksum": 132,
+            "statistics": {
+                ".js": {
+                    "code": 1294,
+                    "comment": 28,
+                    "blank": 130
+                },
+                ".json": {
+                    "code": 6451,
+                    "comment": 0,
+                    "blank": 2
+                },
+                "": {
+                    "code": 5,
+                    "comment": 1,
+                    "blank": 0
+                }
+            },
+            "filelist": [
+                {
+                    "filename": "frontend\\images\\icon.jpg",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 0,
+                    "code": 3,
+                    "comment": 1,
+                    "filename": "server\\.env"
+                },
+                {
+                    "blank": 0,
+                    "code": 2,
+                    "comment": 0,
+                    "filename": "server\\.gitignore"
+                },
+                {
+                    "blank": 14,
+                    "code": 114,
+                    "comment": 3,
+                    "filename": "server\\controllers\\guidesController.js"
+                },
+                {
+                    "blank": 17,
+                    "code": 168,
+                    "comment": 0,
+                    "filename": "server\\controllers\\guidetourControllers.js"
+                },
+                {
+                    "blank": 10,
+                    "code": 67,
+                    "comment": 0,
+                    "filename": "server\\controllers\\reviewController.js"
+                },
+                {
+                    "blank": 12,
+                    "code": 116,
+                    "comment": 3,
+                    "filename": "server\\controllers\\securityagencyController.js"
+                },
+                {
+                    "blank": 11,
+                    "code": 114,
+                    "comment": 3,
+                    "filename": "server\\controllers\\travelagencyControllers.js"
+                },
+                {
+                    "blank": 18,
+                    "code": 132,
+                    "comment": 12,
+                    "filename": "server\\controllers\\travelagencyTourController.js"
+                },
+                {
+                    "blank": 10,
+                    "code": 86,
+                    "comment": 3,
+                    "filename": "server\\controllers\\userController.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 10,
+                    "comment": 0,
+                    "filename": "server\\Database\\db.js"
+                },
+                {
+                    "blank": 6,
+                    "code": 31,
+                    "comment": 3,
+                    "filename": "server\\index.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 28,
+                    "comment": 0,
+                    "filename": "server\\models\\bookingGuide.js"
+                },
+                {
+                    "blank": 3,
+                    "code": 51,
+                    "comment": 1,
+                    "filename": "server\\models\\guides.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 59,
+                    "comment": 0,
+                    "filename": "server\\models\\guideTour.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 25,
+                    "comment": 0,
+                    "filename": "server\\models\\review.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 36,
+                    "comment": 0,
+                    "filename": "server\\models\\SecurityAgency.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 36,
+                    "comment": 0,
+                    "filename": "server\\models\\TravelAgency.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 63,
+                    "comment": 0,
+                    "filename": "server\\models\\TravelAgencytour.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 37,
+                    "comment": 0,
+                    "filename": "server\\models\\users.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 6418,
+                    "comment": 0,
+                    "filename": "server\\package-lock.json"
+                },
+                {
+                    "blank": 0,
+                    "code": 33,
+                    "comment": 0,
+                    "filename": "server\\package.json"
+                },
+                {
+                    "blank": 2,
+                    "code": 19,
+                    "comment": 0,
+                    "filename": "server\\routes\\guidesRoutes.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 15,
+                    "comment": 0,
+                    "filename": "server\\routes\\guidetourRoutes.js"
+                },
+                {
+                    "blank": 3,
+                    "code": 15,
+                    "comment": 0,
+                    "filename": "server\\routes\\reviewRoutes.js"
+                },
+                {
+                    "blank": 3,
+                    "code": 19,
+                    "comment": 0,
+                    "filename": "server\\routes\\securityAgencyRoutes.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 19,
+                    "comment": 0,
+                    "filename": "server\\routes\\travelagencyRoutes.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 15,
+                    "comment": 0,
+                    "filename": "server\\routes\\travelAgencyTourRoutes.js"
+                },
+                {
+                    "blank": 3,
+                    "code": 19,
+                    "comment": 0,
+                    "filename": "server\\routes\\userRoutes.js"
+                }
+            ]
+        },
+        {
+            "version": "0.2.7",
+            "counttime": "2023-01-18 21:33:10",
+            "filesum": 32,
+            "codesum": 8925,
+            "commentsum": 84,
+            "blanksum": 177,
+            "statistics": {
+                ".js": {
+                    "code": 1301,
+                    "comment": 42,
+                    "blank": 141
+                },
+                ".json": {
+                    "code": 7512,
+                    "comment": 0,
+                    "blank": 2
+                },
+                "": {
+                    "code": 9,
+                    "comment": 1,
+                    "blank": 0
+                },
+                ".txt": {
+                    "code": 103,
+                    "comment": 41,
+                    "blank": 34
+                }
+            },
+            "filelist": [
+                {
+                    "filename": "frontend\\images\\icon.jpg",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 0,
+                    "code": 7,
+                    "comment": 1,
+                    "filename": "server\\.env"
+                },
+                {
+                    "blank": 0,
+                    "code": 2,
+                    "comment": 0,
+                    "filename": "server\\.gitignore"
+                },
+                {
+                    "blank": 34,
+                    "code": 103,
+                    "comment": 41,
+                    "filename": "server\\controllers\\d.txt"
+                },
+                {
+                    "blank": 15,
+                    "code": 138,
+                    "comment": 4,
+                    "filename": "server\\controllers\\guidesController.js"
+                },
+                {
+                    "blank": 16,
+                    "code": 131,
+                    "comment": 0,
+                    "filename": "server\\controllers\\guidetourControllers.js"
+                },
+                {
+                    "blank": 9,
+                    "code": 73,
+                    "comment": 0,
+                    "filename": "server\\controllers\\reviewController.js"
+                },
+                {
+                    "blank": 13,
+                    "code": 119,
+                    "comment": 3,
+                    "filename": "server\\controllers\\securityagencyController.js"
+                },
+                {
+                    "blank": 13,
+                    "code": 119,
+                    "comment": 3,
+                    "filename": "server\\controllers\\travelagencyControllers.js"
+                },
+                {
+                    "blank": 16,
+                    "code": 103,
+                    "comment": 12,
+                    "filename": "server\\controllers\\travelagencyTourController.js"
+                },
+                {
+                    "blank": 14,
+                    "code": 98,
+                    "comment": 3,
+                    "filename": "server\\controllers\\userController.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 10,
+                    "comment": 0,
+                    "filename": "server\\Database\\db.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 6,
+                    "comment": 0,
+                    "filename": "server\\handlers\\cloudinary.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 41,
+                    "comment": 10,
+                    "filename": "server\\handlers\\multer.js"
+                },
+                {
+                    "blank": 6,
+                    "code": 31,
+                    "comment": 3,
+                    "filename": "server\\index.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 28,
+                    "comment": 0,
+                    "filename": "server\\models\\bookingGuide.js"
+                },
+                {
+                    "blank": 5,
+                    "code": 41,
+                    "comment": 1,
+                    "filename": "server\\models\\guides.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 59,
+                    "comment": 0,
+                    "filename": "server\\models\\guideTour.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 27,
+                    "comment": 0,
+                    "filename": "server\\models\\review.js"
+                },
+                {
+                    "blank": 3,
+                    "code": 31,
+                    "comment": 1,
+                    "filename": "server\\models\\SecurityAgency.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 31,
+                    "comment": 1,
+                    "filename": "server\\models\\TravelAgency.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 63,
+                    "comment": 0,
+                    "filename": "server\\models\\TravelAgencytour.js"
+                },
+                {
+                    "blank": 4,
+                    "code": 31,
+                    "comment": 1,
+                    "filename": "server\\models\\users.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 7478,
+                    "comment": 0,
+                    "filename": "server\\package-lock.json"
+                },
+                {
+                    "blank": 0,
+                    "code": 34,
+                    "comment": 0,
+                    "filename": "server\\package.json"
+                },
+                {
+                    "blank": 2,
+                    "code": 19,
+                    "comment": 0,
+                    "filename": "server\\routes\\guidesRoutes.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 15,
+                    "comment": 0,
+                    "filename": "server\\routes\\guidetourRoutes.js"
+                },
+                {
+                    "blank": 3,
+                    "code": 15,
+                    "comment": 0,
+                    "filename": "server\\routes\\reviewRoutes.js"
+                },
+                {
+                    "blank": 3,
+                    "code": 19,
+                    "comment": 0,
+                    "filename": "server\\routes\\securityAgencyRoutes.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 19,
+                    "comment": 0,
+                    "filename": "server\\routes\\travelagencyRoutes.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 15,
+                    "comment": 0,
+                    "filename": "server\\routes\\travelAgencyTourRoutes.js"
+                },
+                {
+                    "blank": 3,
+                    "code": 19,
+                    "comment": 0,
+                    "filename": "server\\routes\\userRoutes.js"
+                }
+            ]
+        },
+        {
+            "version": "0.2.7",
+            "counttime": "2023-01-19 15:32:36",
+            "filesum": 34,
+            "codesum": 9024,
+            "commentsum": 121,
+            "blanksum": 194,
+            "statistics": {
+                ".js": {
+                    "code": 1349,
+                    "comment": 78,
+                    "blank": 143
+                },
+                ".json": {
+                    "code": 7535,
+                    "comment": 0,
+                    "blank": 2
+                },
+                ".txt": {
+                    "code": 130,
+                    "comment": 42,
+                    "blank": 49
+                },
+                "": {
+                    "code": 10,
+                    "comment": 1,
+                    "blank": 0
+                }
+            },
+            "filelist": [
+                {
+                    "filename": "frontend\\images\\icon.jpg",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 0,
+                    "code": 8,
+                    "comment": 1,
+                    "filename": "server\\.env"
+                },
+                {
+                    "blank": 0,
+                    "code": 2,
+                    "comment": 0,
+                    "filename": "server\\.gitignore"
+                },
+                {
+                    "blank": 49,
+                    "code": 130,
+                    "comment": 42,
+                    "filename": "server\\controllers\\d.txt"
+                },
+                {
+                    "blank": 16,
+                    "code": 148,
+                    "comment": 1,
+                    "filename": "server\\controllers\\guidesController.js"
+                },
+                {
+                    "blank": 16,
+                    "code": 131,
+                    "comment": 0,
+                    "filename": "server\\controllers\\guidetourControllers.js"
+                },
+                {
+                    "blank": 9,
+                    "code": 73,
+                    "comment": 0,
+                    "filename": "server\\controllers\\reviewController.js"
+                },
+                {
+                    "blank": 13,
+                    "code": 129,
+                    "comment": 0,
+                    "filename": "server\\controllers\\securityagencyController.js"
+                },
+                {
+                    "blank": 13,
+                    "code": 129,
+                    "comment": 0,
+                    "filename": "server\\controllers\\travelagencyControllers.js"
+                },
+                {
+                    "blank": 16,
+                    "code": 103,
+                    "comment": 12,
+                    "filename": "server\\controllers\\travelagencyTourController.js"
+                },
+                {
+                    "blank": 12,
+                    "code": 122,
+                    "comment": 5,
+                    "filename": "server\\controllers\\userController.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 10,
+                    "comment": 0,
+                    "filename": "server\\Database\\db.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 8,
+                    "comment": 0,
+                    "filename": "server\\handlers\\cloudinary.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 14,
+                    "comment": 50,
+                    "filename": "server\\handlers\\multer.js"
+                },
+                {
+                    "blank": 7,
+                    "code": 31,
+                    "comment": 3,
+                    "filename": "server\\index.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "server\\middlewares\\auth.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": "server\\middlewares\\catchAsyncErrors.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 28,
+                    "comment": 0,
+                    "filename": "server\\models\\bookingGuide.js"
+                },
+                {
+                    "blank": 5,
+                    "code": 46,
+                    "comment": 1,
+                    "filename": "server\\models\\guides.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 59,
+                    "comment": 0,
+                    "filename": "server\\models\\guideTour.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 27,
+                    "comment": 0,
+                    "filename": "server\\models\\review.js"
+                },
+                {
+                    "blank": 4,
+                    "code": 34,
+                    "comment": 1,
+                    "filename": "server\\models\\SecurityAgency.js"
+                },
+                {
+                    "blank": 3,
+                    "code": 34,
+                    "comment": 1,
+                    "filename": "server\\models\\TravelAgency.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 63,
+                    "comment": 0,
+                    "filename": "server\\models\\TravelAgencytour.js"
+                },
+                {
+                    "blank": 3,
+                    "code": 35,
+                    "comment": 4,
+                    "filename": "server\\models\\users.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 7499,
+                    "comment": 0,
+                    "filename": "server\\package-lock.json"
+                },
+                {
+                    "blank": 0,
+                    "code": 36,
+                    "comment": 0,
+                    "filename": "server\\package.json"
+                },
+                {
+                    "blank": 2,
+                    "code": 19,
+                    "comment": 0,
+                    "filename": "server\\routes\\guidesRoutes.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 15,
+                    "comment": 0,
+                    "filename": "server\\routes\\guidetourRoutes.js"
+                },
+                {
+                    "blank": 3,
+                    "code": 15,
+                    "comment": 0,
+                    "filename": "server\\routes\\reviewRoutes.js"
+                },
+                {
+                    "blank": 3,
+                    "code": 19,
+                    "comment": 0,
+                    "filename": "server\\routes\\securityAgencyRoutes.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 19,
+                    "comment": 0,
+                    "filename": "server\\routes\\travelagencyRoutes.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 15,
+                    "comment": 0,
+                    "filename": "server\\routes\\travelAgencyTourRoutes.js"
+                },
+                {
+                    "blank": 3,
+                    "code": 20,
+                    "comment": 0,
+                    "filename": "server\\routes\\userRoutes.js"
+                }
+            ]
+        },
+        {
+            "version": "0.2.7",
+            "counttime": "2023-01-20 12:58:40",
+            "filesum": 34,
+            "codesum": 9069,
+            "commentsum": 92,
+            "blanksum": 218,
+            "statistics": {
+                ".js": {
+                    "code": 1383,
+                    "comment": 42,
+                    "blank": 157
+                },
+                ".json": {
+                    "code": 7535,
+                    "comment": 0,
+                    "blank": 2
+                },
+                "": {
+                    "code": 10,
+                    "comment": 1,
+                    "blank": 0
+                },
+                ".txt": {
+                    "code": 141,
+                    "comment": 49,
+                    "blank": 59
+                }
+            },
+            "filelist": [
+                {
+                    "filename": "frontend\\images\\icon.jpg",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 0,
+                    "code": 8,
+                    "comment": 1,
+                    "filename": "server\\.env"
+                },
+                {
+                    "blank": 0,
+                    "code": 2,
+                    "comment": 0,
+                    "filename": "server\\.gitignore"
+                },
+                {
+                    "blank": 59,
+                    "code": 141,
+                    "comment": 49,
+                    "filename": "server\\controllers\\d.txt"
+                },
+                {
+                    "blank": 17,
+                    "code": 124,
+                    "comment": 4,
+                    "filename": "server\\controllers\\guidesController.js"
+                },
+                {
+                    "blank": 15,
+                    "code": 121,
+                    "comment": 8,
+                    "filename": "server\\controllers\\guidetourControllers.js"
+                },
+                {
+                    "blank": 9,
+                    "code": 73,
+                    "comment": 0,
+                    "filename": "server\\controllers\\reviewController.js"
+                },
+                {
+                    "blank": 17,
+                    "code": 119,
+                    "comment": 3,
+                    "filename": "server\\controllers\\securityagencyController.js"
+                },
+                {
+                    "blank": 15,
+                    "code": 120,
+                    "comment": 3,
+                    "filename": "server\\controllers\\travelagencyControllers.js"
+                },
+                {
+                    "blank": 14,
+                    "code": 119,
+                    "comment": 8,
+                    "filename": "server\\controllers\\travelagencyTourController.js"
+                },
+                {
+                    "blank": 17,
+                    "code": 125,
+                    "comment": 5,
+                    "filename": "server\\controllers\\userController.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 10,
+                    "comment": 0,
+                    "filename": "server\\Database\\db.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 8,
+                    "comment": 0,
+                    "filename": "server\\handlers\\cloudinary.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 14,
+                    "comment": 1,
+                    "filename": "server\\handlers\\multer.js"
+                },
+                {
+                    "blank": 7,
+                    "code": 31,
+                    "comment": 3,
+                    "filename": "server\\index.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "server\\middlewares\\auth.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": "server\\middlewares\\catchAsyncErrors.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 28,
+                    "comment": 0,
+                    "filename": "server\\models\\bookingGuide.js"
+                },
+                {
+                    "blank": 5,
+                    "code": 48,
+                    "comment": 1,
+                    "filename": "server\\models\\guides.js"
+                },
+                {
+                    "blank": 3,
+                    "code": 60,
+                    "comment": 0,
+                    "filename": "server\\models\\guideTour.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 27,
+                    "comment": 0,
+                    "filename": "server\\models\\review.js"
+                },
+                {
+                    "blank": 4,
+                    "code": 35,
+                    "comment": 1,
+                    "filename": "server\\models\\SecurityAgency.js"
+                },
+                {
+                    "blank": 3,
+                    "code": 35,
+                    "comment": 1,
+                    "filename": "server\\models\\TravelAgency.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 67,
+                    "comment": 0,
+                    "filename": "server\\models\\TravelAgencytour.js"
+                },
+                {
+                    "blank": 3,
+                    "code": 35,
+                    "comment": 4,
+                    "filename": "server\\models\\users.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 7499,
+                    "comment": 0,
+                    "filename": "server\\package-lock.json"
+                },
+                {
+                    "blank": 0,
+                    "code": 36,
+                    "comment": 0,
+                    "filename": "server\\package.json"
+                },
+                {
+                    "blank": 2,
+                    "code": 34,
+                    "comment": 0,
+                    "filename": "server\\routes\\guidesRoutes.js"
+                },
+                {
+                    "blank": 4,
+                    "code": 34,
+                    "comment": 0,
+                    "filename": "server\\routes\\guidetourRoutes.js"
+                },
+                {
+                    "blank": 3,
+                    "code": 15,
+                    "comment": 0,
+                    "filename": "server\\routes\\reviewRoutes.js"
+                },
+                {
+                    "blank": 4,
+                    "code": 24,
+                    "comment": 0,
+                    "filename": "server\\routes\\securityAgencyRoutes.js"
+                },
+                {
+                    "blank": 3,
+                    "code": 20,
+                    "comment": 0,
+                    "filename": "server\\routes\\travelagencyRoutes.js"
+                },
+                {
+                    "blank": 3,
+                    "code": 34,
+                    "comment": 0,
+                    "filename": "server\\routes\\travelAgencyTourRoutes.js"
+                },
+                {
+                    "blank": 3,
+                    "code": 20,
+                    "comment": 0,
+                    "filename": "server\\routes\\userRoutes.js"
+                }
+            ]
+        },
+        {
+            "version": "0.2.7",
+            "counttime": "2023-01-20 16:16:23",
+            "filesum": 32,
+            "codesum": 9042,
+            "commentsum": 99,
+            "blanksum": 222,
+            "statistics": {
+                ".js": {
+                    "code": 1356,
+                    "comment": 49,
+                    "blank": 161
+                },
+                ".json": {
+                    "code": 7535,
+                    "comment": 0,
+                    "blank": 2
+                },
+                ".txt": {
+                    "code": 141,
+                    "comment": 49,
+                    "blank": 59
+                },
+                "": {
+                    "code": 10,
+                    "comment": 1,
+                    "blank": 0
+                }
+            },
+            "filelist": [
+                {
+                    "filename": "frontend\\images\\icon.jpg",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 0,
+                    "code": 8,
+                    "comment": 1,
+                    "filename": "server\\.env"
+                },
+                {
+                    "blank": 0,
+                    "code": 2,
+                    "comment": 0,
+                    "filename": "server\\.gitignore"
+                },
+                {
+                    "blank": 59,
+                    "code": 141,
+                    "comment": 49,
+                    "filename": "server\\controllers\\d.txt"
+                },
+                {
+                    "blank": 16,
+                    "code": 121,
+                    "comment": 8,
+                    "filename": "server\\controllers\\guidesController.js"
+                },
+                {
+                    "blank": 16,
+                    "code": 138,
+                    "comment": 8,
+                    "filename": "server\\controllers\\guidetourControllers.js"
+                },
+                {
+                    "blank": 9,
+                    "code": 73,
+                    "comment": 0,
+                    "filename": "server\\controllers\\reviewController.js"
+                },
+                {
+                    "blank": 17,
+                    "code": 119,
+                    "comment": 3,
+                    "filename": "server\\controllers\\securityagencyController.js"
+                },
+                {
+                    "blank": 15,
+                    "code": 120,
+                    "comment": 3,
+                    "filename": "server\\controllers\\travelagencyControllers.js"
+                },
+                {
+                    "blank": 16,
+                    "code": 128,
+                    "comment": 8,
+                    "filename": "server\\controllers\\travelagencyTourController.js"
+                },
+                {
+                    "blank": 16,
+                    "code": 116,
+                    "comment": 8,
+                    "filename": "server\\controllers\\userController.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 10,
+                    "comment": 0,
+                    "filename": "server\\Database\\db.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 8,
+                    "comment": 0,
+                    "filename": "server\\handlers\\cloudinary.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 14,
+                    "comment": 1,
+                    "filename": "server\\handlers\\multer.js"
+                },
+                {
+                    "blank": 7,
+                    "code": 31,
+                    "comment": 3,
+                    "filename": "server\\index.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 28,
+                    "comment": 0,
+                    "filename": "server\\models\\bookingGuide.js"
+                },
+                {
+                    "blank": 6,
+                    "code": 44,
+                    "comment": 1,
+                    "filename": "server\\models\\guides.js"
+                },
+                {
+                    "blank": 3,
+                    "code": 51,
+                    "comment": 0,
+                    "filename": "server\\models\\guideTour.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 27,
+                    "comment": 0,
+                    "filename": "server\\models\\review.js"
+                },
+                {
+                    "blank": 4,
+                    "code": 32,
+                    "comment": 1,
+                    "filename": "server\\models\\SecurityAgency.js"
+                },
+                {
+                    "blank": 3,
+                    "code": 32,
+                    "comment": 1,
+                    "filename": "server\\models\\TravelAgency.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 55,
+                    "comment": 0,
+                    "filename": "server\\models\\TravelAgencytour.js"
+                },
+                {
+                    "blank": 4,
+                    "code": 32,
+                    "comment": 4,
+                    "filename": "server\\models\\users.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 7499,
+                    "comment": 0,
+                    "filename": "server\\package-lock.json"
+                },
+                {
+                    "blank": 0,
+                    "code": 36,
+                    "comment": 0,
+                    "filename": "server\\package.json"
+                },
+                {
+                    "blank": 2,
+                    "code": 34,
+                    "comment": 0,
+                    "filename": "server\\routes\\guidesRoutes.js"
+                },
+                {
+                    "blank": 4,
+                    "code": 34,
+                    "comment": 0,
+                    "filename": "server\\routes\\guidetourRoutes.js"
+                },
+                {
+                    "blank": 3,
+                    "code": 15,
+                    "comment": 0,
+                    "filename": "server\\routes\\reviewRoutes.js"
+                },
+                {
+                    "blank": 4,
+                    "code": 20,
+                    "comment": 0,
+                    "filename": "server\\routes\\securityAgencyRoutes.js"
+                },
+                {
+                    "blank": 3,
+                    "code": 20,
+                    "comment": 0,
+                    "filename": "server\\routes\\travelagencyRoutes.js"
+                },
+                {
+                    "blank": 3,
+                    "code": 34,
+                    "comment": 0,
+                    "filename": "server\\routes\\travelAgencyTourRoutes.js"
+                },
+                {
+                    "blank": 3,
+                    "code": 20,
+                    "comment": 0,
+                    "filename": "server\\routes\\userRoutes.js"
+                }
+            ]
+        }
+    ]
+}

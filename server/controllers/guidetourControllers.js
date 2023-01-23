@@ -1,122 +1,114 @@
 const Tour = require("../models/guideTour");
+require("../handlers/cloudinary");
+const cloudinary = require("cloudinary").v2;
 const fs = require("fs");
-const formidable = require("formidable");
 
-exports.createTour = async (req, res, next) => {
-  let form = new formidable.IncomingForm();
-  form.keepExtensions = true;
-  form.parse(req, (err, fields, files) => {
-    if (err) {
-      res.status(400).send("error");
-    }
-
-    let tours = new Tour(fields);
+//guide tour
+exports.createTour = async (req, res) => {
+  try {
+    let {
+      name,
+      duration,
+      ratingsAverage,
+      ratingsQuantity,
+      price,
+      summary,
+      description,
+      startDates,
+      startLocation,
+      guide,
+    } = req.body;
     if (
-      files.imageCover &&
-      files.image1 &&
-      files.image2 &&
-      files.image1 &&
-      files.image3
+      !name ||
+      !duration ||
+      !ratingsAverage ||
+      !ratingsQuantity ||
+      !price ||
+      !summary ||
+      !description ||
+      !startDates ||
+      !startLocation ||
+      !guide
     ) {
-      if (files.imageCover.size > 1000000) {
-        return res
-          .status(400)
-          .json({ error: "imageCover should be les than 1mb" });
-      }
-      if (files.image1.size > 1000000) {
-        return res.status(400).json({ error: "image should be les than 1mb" });
-      }
-      if (files.image2.size > 1000000) {
-        return res.status(400).json({ error: "image should be les than 1mb" });
-      }
-      if (files.image3.size > 1000000) {
-        return res.status(400).json({ error: "image should be les than 1mb" });
-      }
-      const {
-        name,
-        duration,
-        summary,
-        description,
-        startDates,
-        startLocation,
-      } = fields;
-
-      if (!name || !duration || !summary || !description || !startLocation) {
-        return res.status(400).json({
-          error: "all fields are required!",
-        });
-      }
-
-      tours.imageCover.data = fs.readFileSync(files.imageCover.filepath);
-      tours.imageCover.contentType = files.imageCover.mimetype;
-      tours.image1.data = fs.readFileSync(files.image1.filepath);
-      tours.image1.contentType = files.image1.mimetype;
-      tours.image2.data = fs.readFileSync(files.image2.filepath);
-      tours.image2.contentType = files.image2.mimetype;
-      tours.image3.data = fs.readFileSync(files.image3.filepath);
-      tours.image3.contentType = files.image3.mimetype;
+      return res.status(400).send("all fields are required");
     }
 
-    tours.save((err, result) => {
+    // let userExist = await Guides.findOne({ email: req.body.email });
+    // if (userExist) {
+    //   return res.status(400).send("That user already exisits!");
+    // }
+    //tour images upload
+    let imageCover = await cloudinary.uploader.upload(
+      req.files.imageCover[0].path
+    );
+    let image1 = await cloudinary.uploader.upload(req.files.image1[0].path);
+    let image2 = await cloudinary.uploader.upload(req.files.image2[0].path);
+    let image3 = await cloudinary.uploader.upload(req.files.image3[0].path);
+    fs.unlink(req.files.imageCover[0].path, (err) => {
       if (err) {
-        return res.status(400).json(err);
+        console.log(err);
       }
-      res.json(result);
     });
-  });
+    fs.unlink(req.files.image1[0].path, (err) => {
+      if (err) {
+        console.log(err);
+      }
+    });
+    fs.unlink(req.files.image2[0].path, (err) => {
+      if (err) {
+        console.log(err);
+      }
+    });
+    fs.unlink(req.files.image3[0].path, (err) => {
+      if (err) {
+        console.log(err);
+      }
+    });
+
+    // Create new tour
+    let tour = new Tour({
+      name: req.body.name,
+      duration: req.body.duration,
+      ratingsAverage: req.body.ratingsAverage,
+      ratingsQuantity: req.body.ratingsQuantity,
+      price: req.body.price,
+      summary: req.body.summary,
+      description: req.body.description,
+      startDates: req.body.startDates,
+      startLocation: req.body.startLocation,
+      imageCover: imageCover.secure_url,
+      image1: image1.secure_url,
+      image2: image2.secure_url,
+      image3: image3.secure_url,
+
+      guide: req.body.guide,
+    });
+    // Save guide
+    await tour.save();
+
+    res.status(201).json(tour);
+  } catch (e) {
+    res.status(500).json({ message: e.message });
+  }
 };
 
-exports.updateTour = (req, res) => {
-  let form = new formidable.IncomingForm();
-  form.keepExtensions = true;
-  form.parse(req, (err, fields, files) => {
-    if (err) {
-      res.status(400).send("error");
+exports.updateTour = async (req, res) => {
+  try {
+    let guidetour = await Tour.findById(req.params.id);
+    if (!guidetour) {
+      return res.status(404).send("cant find tour");
     }
 
-    let tours = new Tour(fields);
-    if (
-      files.imageCover &&
-      files.image1 &&
-      files.image2 &&
-      files.image1 &&
-      files.image3
-    ) {
-      if (files.imageCover.size > 1000000) {
-        return res.status(400).json({ error: "file should be les than 1mb" });
-      }
-      if (files.image1.size > 1000000) {
-        return res.status(400).json({ error: "file should be les than 1mb" });
-      }
-      if (files.image2.size > 1000000) {
-        return res.status(400).json({ error: "file should be les than 1mb" });
-      }
-      if (files.image3.size > 1000000) {
-        return res.status(400).json({ error: "file should be les than 1mb" });
-      }
+    guidetour = await Tour.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      useFindAndModify: false,
+    });
 
-      tours.imageCover.data = fs.readFileSync(files.imageCover.filepath);
-      tours.imageCover.contentType = files.imageCover.mimetype;
-      tours.image1.data = fs.readFileSync(files.image1.filepath);
-      tours.image1.contentType = files.image1.mimetype;
-      tours.image2.data = fs.readFileSync(files.image2.filepath);
-      tours.image2.contentType = files.image2.mimetype;
-      tours.image3.data = fs.readFileSync(files.image3.filepath);
-      tours.image3.contentType = files.image3.mimetype;
-    }
-  });
-  Tour.findByIdAndUpdate(
-    { _id: req.params.id },
-    { $set: req.body },
-    { new: true },
-    (err, tour) => {
-      if (err || !tour) {
-        return res.status(404).send("tour not found");
-      }
-
-      res.status(201).send(tour);
-    }
-  );
+    await guidetour.save();
+    res.status(200).send(guidetour);
+  } catch (e) {
+    res.status(500).send(e);
+  }
 };
 
 exports.remove = async (req, res) => {
@@ -151,11 +143,20 @@ exports.tourByid = async (req, res) => {
   }
 };
 
-exports.allTours = (req, res) => {
-  Tour.find({}, (err, tours) => {
-    if (err) {
-      res.status(400).send(err);
+exports.allTours = async (req, res) => {
+  try {
+    let guideTours = req.query.guideTours ? req.query.guideTours : "asc";
+    let sortBy = req.query.sortBy ? req.query.sortBy : "_id";
+    let limit = req.query.limit ? parseInt(req.query.limit) : 6;
+
+    const tours = await Tour.find({})
+      .sort([[sortBy, guideTours]])
+      .limit(limit);
+    if (!tours) {
+      res.status(404).send("tours not found");
     }
     res.status(200).send(tours);
-  });
+  } catch (e) {
+    res.status(500).send();
+  }
 };

@@ -19,7 +19,7 @@ const bookingSchema = mongoose.Schema(
     price: { type: Number, required: [true, "booking must have price"] },
     paid: {
       type: Boolean,
-      required: [true, "paid must be in booking"],
+      required: [true],
     },
   },
   { timestamps: true }

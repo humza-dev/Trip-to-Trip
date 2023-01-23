@@ -1,4 +1,6 @@
 const express = require("express");
+const upload = require("../handlers/multer");
+
 const router = express.Router();
 
 const {
@@ -11,12 +13,12 @@ const {
   remove,
 } = require("../controllers/securityagencyController");
 
-router.post("/securityagency/signup", signup);
-router.get("/securityagency/signin", signin);
-router.get("/securityagency/signout", signout);
-router.get("/securityagency/:userID", read);
+router.post("/signup", upload.single("companylicense"), signup);
+router.get("/signin", signin);
+router.get("/signout", signout);
+router.get("/:userID", read);
 router.get("/securityagencies", readall);
-router.patch("/securityagency/:userID", update);
-router.delete("/securityagency/:userID", remove);
+router.patch("/:userID", upload.single("companylicense"), update);
+router.delete("/:userID", remove);
 
 module.exports = router;

@@ -1,5 +1,6 @@
 const express = require("express");
 const routes = express.Router();
+const upload = require("../handlers/multer");
 
 const {
   signup,
@@ -10,12 +11,26 @@ const {
   remove,
   readall,
 } = require("../controllers/guidesController");
-routes.post("/guides/signup", signup);
-routes.get("/guides/signin", signin);
-routes.get("/guides/signout", signout);
-routes.get("/guides/:userID", read);
+routes.post(
+  "/signup",
+  upload.fields([
+    { name: "avatar", maxCount: 1 },
+    { name: "guidelicense", maxCount: 1 },
+  ]),
+  signup
+);
+routes.get("/signin", signin);
+routes.get("/signout", signout);
+routes.get("/:userID", read);
 routes.get("/guides", readall);
-routes.patch("/guides/:userID", update);
-routes.delete("/guides/:userID", remove);
+routes.put(
+  "/:userID",
+  upload.fields([
+    { name: "avatar", maxCount: 1 },
+    { name: "guidelicense", maxCount: 1 },
+  ]),
+  update
+);
+routes.delete("/:userID", remove);
 
 module.exports = routes;

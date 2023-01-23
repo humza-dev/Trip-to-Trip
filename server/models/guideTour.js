@@ -7,8 +7,6 @@ const tourSchema = new mongoose.Schema(
       required: true,
       unique: [true, "tour name must be unique"],
       trim: true,
-      maxlength: [40, "A tour name must have less than 40 characters"],
-      minlength: [10, "A tour name must be at least 10 characters"],
     },
     duration: { type: Number, required: true },
     ratingsAverage: {
@@ -34,25 +32,20 @@ const tourSchema = new mongoose.Schema(
       required: true,
       maxlength: 200,
     },
-    imageCover: { data: Buffer, contentType: String },
-    image1: { data: Buffer, contentType: String },
-    image2: { data: Buffer, contentType: String },
-    image3: { data: Buffer, contentType: String },
-    images: [String],
+    imageCover: { type: String },
+    image1: { type: String },
+    image2: { type: String },
+    image3: { type: String },
+    imageCovercloudinary_id: {
+      type: String,
+    },
+
     startDates: {
       type: Date,
       default: Date.now(),
     },
     startLocation: { type: String },
-    guides: { type: mongoose.Schema.ObjectId, ref: "Guides", required: true },
-    locations: [
-      {
-        type: String,
-        address: String,
-        description: String,
-        day: Number,
-      },
-    ],
+    guide: { type: mongoose.Schema.ObjectId, ref: "Guides", required: true },
   },
   { timestamps: true }
 );

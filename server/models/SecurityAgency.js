@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const validator = require("validator");
 
 const SecurityAgencyScheama = new mongoose.Schema(
   {
@@ -15,24 +16,22 @@ const SecurityAgencyScheama = new mongoose.Schema(
       trim: true,
       lowercase: true,
       required: true,
-      index: true,
+      validate: [validator.isEmail, "Please Enter a valid Email"],
     },
-    password: { type: String, trim: true, required: true },
-    passwordConfirm: {
+    password: {
       type: String,
-      required: [true, "Please confirm your password"],
-      validate: {
-        validator: function (el) {
-          return el === this.password;
-        },
-        message: "Passwords must match",
-      },
+      trim: true,
+      required: [true, "Please Enter Your Password"],
+      minLength: [8, "Password should be greater than 8 characters"],
     },
+
     address: { type: String, trim: true, required: true },
     phonenumber: { type: Number, trim: true, required: true },
-    companylicense: { data: Buffer, contentType: String },
+    companylicense: { type: String },
   },
   { timestamps: true }
 );
+
+//TODO PASSWORD HASH AND COMPARE
 
 module.exports = mongoose.model("SecurityAgency", SecurityAgencyScheama);

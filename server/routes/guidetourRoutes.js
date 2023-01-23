@@ -1,5 +1,7 @@
 const express = require("express");
 const router = express.Router();
+const upload = require("../handlers/multer");
+
 const {
   createTour,
   updateTour,
@@ -8,10 +10,29 @@ const {
   allTours,
 } = require("../controllers/guidetourControllers");
 
-router.post("/guidetour/createtour", createTour);
-router.patch("/guidetour/:id", updateTour);
-router.delete("/guidetour/:id", remove);
-router.get("/guidetour/:id", tourByid);
+router.post(
+  "/createtour",
+
+  upload.fields([
+    { name: "imageCover", maxCount: 1 },
+    { name: "image1", maxCount: 1 },
+    { name: "image2", maxCount: 1 },
+    { name: "image3", maxCount: 1 },
+  ]),
+  createTour
+);
+router.patch(
+  "/:id",
+  upload.fields([
+    { name: "imageCover", maxCount: 1 },
+    { name: "image1", maxCount: 1 },
+    { name: "image2", maxCount: 1 },
+    { name: "image3", maxCount: 1 },
+  ]),
+  updateTour
+);
+router.delete("/:id", remove);
+router.get("/:id", tourByid);
 router.get("/guidetours", allTours);
 
 module.exports = router;

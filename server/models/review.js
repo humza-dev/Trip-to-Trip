@@ -5,7 +5,9 @@ const ReviewModel = mongoose.Schema({
     required: true,
   },
   rating: {
-    type: Number,
+    type: [Number, "it should be number"],
+    min: 1,
+    max: 5,
   },
   tour: {
     type: mongoose.Schema.ObjectId,

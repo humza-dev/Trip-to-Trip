@@ -1,50 +1,95 @@
 const User = require("../models/users");
-exports.signup = (req, res) => {
-  const user = new User(req.body);
-  user.save((err, user) => {
-    if (err) {
-      res.status(400).send(err);
+const fs = require("fs");
+const cloudinary = require("cloudinary");
+const path = require("path");
+
+require("../handlers/cloudinary");
+
+exports.signup = async (req, res) => {
+  try {
+    let { fullname, password, email } = req.body;
+    if (!fullname || !password || !email) {
+      return res.status(400).send("all fields are required");
     }
 
+    // let userExist = User.findOne({ email: req.body.email });
+    // if (userExist) {
+    //   return res.status(400).send("That user already exisits!");
+    // }
+    //Upload image to cloudinary
+    let result = await cloudinary.uploader.upload(req.file.path);
+
+    fs.unlink(req.file.path, (err) => {
+      console.log(err);
+    });
+    // Create new user
+    let user = new User({
+      fullname: req.body.fullname,
+      password: req.body.password,
+      email: req.body.email,
+      avatar: result.secure_url,
+    });
+    // Save user
+    await user.save();
     user.password = undefined;
-    res.status(201).json({ user });
-  });
+    res.json(user);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
 };
-exports.signin = (req, res) => {
-  const { email, password } = req.body;
-  User.findOne({ email }, (err, user) => {
-    if (err || !user) {
-      return res.status(400).json({
-        error: "User with following email doen't exist. Please signup",
-      });
+
+exports.signin = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    if (!email || !password) {
+      return res.status(404).send("email and password are required");
+    }
+    const user = await User.find((e) => e.email === email);
+    if (!user) {
+      return res.status(401).json({ error: "Invalid email or password" });
     }
 
-    const { _id, username, email } = user;
-    return res.json({ user: _id, username, email });
-  });
+    res.status(200).send(user);
+  } catch (e) {
+    res.status(500).send();
+  }
 };
 exports.signout = (req, res) => {
-  res.clearCookie("t");
-  res.json({ message: "signed out successfully" });
+  try {
+    req.session.destroy((err) => {
+      if (err) {
+        return res.status(400).send(err);
+      }
+      res.redirect("logout succuess");
+    });
+  } catch (e) {
+    res.status(400).send(e);
+  }
 };
 
-exports.update = (req, res) => {
-  User.findOneAndUpdate(
-    { _id: req.params.userID },
-    { $set: req.body },
-    { new: true },
-    (err, user) => {
-      if (err) {
-        res.status(400).json(err);
-      }
-      res.save().send({ user });
-    }
-  );
+exports.update = async (req, res) => {
+  try {
+    let user = await User.findById(req.params.userID);
+    // Upload image to cloudinary
+    let result = await cloudinary.uploader.upload(req.file.path);
+    let data = {
+      fullname: req.body.fullname || user.fullname,
+      password: req.body.password,
+      email: req.body.email,
+      avatar: result.secure_url || user.avatar,
+    };
+    user = await User.findByIdAndUpdate(req.params.userID, data, {
+      new: true,
+    });
+    res.json(user);
+  } catch (e) {
+    res.status(500).send(e);
+  }
 };
 
 exports.remove = async (req, res) => {
   try {
-    const user = await User.findOneAndDelete({
+    let user = await User.findOneAndDelete({
       _id: req.params.userID,
     });
 
@@ -60,8 +105,10 @@ exports.remove = async (req, res) => {
 
 exports.read = async (req, res) => {
   const id = req.params.userID;
+
   try {
     const user = await User.findById({ _id: id });
+    await cloudinary.uploader.destroy(user.cloudinary_id);
 
     if (!user) {
       res.status(404).send("tour not found");
@@ -74,8 +121,20 @@ exports.read = async (req, res) => {
   }
 };
 
-exports.readall = (req, res) => {
-  User.find({}).then((users) => {
-    res.status(201).send(users);
-  });
+exports.readall = async (req, res) => {
+  try {
+    let user = req.query.user ? req.query.user : "asc";
+    let sortBy = req.query.sortBy ? req.query.sortBy : "_id";
+    let limit = req.query.limit ? parseInt(req.query.limit) : 6;
+
+    const users = await User.find({})
+      .sort([[sortBy, user]])
+      .limit(limit);
+    if (!users) {
+      res.status(404).send("users not found");
+    }
+    res.status(200).send(users);
+  } catch (e) {
+    res.status(500).send(e);
+  }
 };

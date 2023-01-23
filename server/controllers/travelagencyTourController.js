@@ -1,73 +1,107 @@
 const TravelAgencytour = require("../models/TravelAgencytour");
 const fs = require("fs");
-const formidable = require("formidable");
 
-exports.createTour = (req, res) => {
-  let form = new formidable.IncomingForm();
-  form.keepExtensions = true;
-  form.parse(req, (err, fields, files) => {
-    if (err) {
-      res.status.send(err);
+require("../handlers/cloudinary");
+const cloudinary = require("cloudinary").v2;
+
+//guide tour
+exports.createTour = async (req, res) => {
+  try {
+    let {
+      name,
+      duration,
+      ratingsAverage,
+      ratingsQuantity,
+      price,
+      summary,
+      description,
+      startDate,
+      startLocation,
+      travelAgency,
+    } = req.body;
+    if (
+      !name ||
+      !duration ||
+      !ratingsAverage ||
+      !ratingsQuantity ||
+      !price ||
+      !summary ||
+      !description ||
+      !startDate ||
+      !startLocation ||
+      !travelAgency
+    ) {
+      return res.status(400).send("all fields are required");
     }
 
-    let tours = TravelAgencytour(fields);
+    // let userExist = await Guides.findOne({ email: req.body.email });
+    // if (userExist) {
+    //   return res.status(400).send("That user already exisits!");
+    // }
+    //tour images upload
+    let imageCover = await cloudinary.uploader.upload(
+      req.files.imageCover[0].path
+    );
+    let image1 = await cloudinary.uploader.upload(req.files.image1[0].path);
+    let image2 = await cloudinary.uploader.upload(req.files.image2[0].path);
+    let image3 = await cloudinary.uploader.upload(req.files.image3[0].path);
 
-    if (files.imageCover && files.image1 && files.image2 && files.image3) {
-      if (files.imageCover.size > 1000000) {
-        return res
-          .status(400)
-          .json({ error: "image cover should be upto 1 mb" });
-      }
-      if (files.image1.size > 1000000) {
-        return res.status(400).json({ error: "image should be upto 1 mb" });
-      }
-      if (files.image2.size > 1000000) {
-        return res.status(400).json({ error: "image should be uptio 1 mb" });
-      }
-      if (files.image3.size > 1000000) {
-        return res.status(400).json({ error: "image should be upto 1 mb" });
-      }
-
-      //   const { name, duration, summary, description, startDate, startlocation } =
-      //     fields;
-
-      //   if (
-      //     !name ||
-      //     !duration ||
-      //     !summary ||
-      //     !description ||
-      //     !startDate ||
-      //     !startlocation
-      //   ) {
-      //     return res.status(400).json({ error: "all fields are required" });
-      //   }
-
-      tours.imageCover.data = fs.readFileSync(files.imageCover.filepath);
-      tours.imageCover.contentType = files.imageCover.mimetype;
-      tours.image1.data = fs.readFileSync(files.image1.filepath);
-      tours.image1.contentType = files.image1.mimetype;
-      tours.image2.data = fs.readFileSync(files.image2.filepath);
-      tours.image2.contentType = files.image2.mimetype;
-      tours.image3.data = fs.readFileSync(files.image3.filepath);
-      tours.image3.contentType = files.image3.mimetype;
-    }
-
-    tours.save((err, data) => {
-      if (err) {
-        res.status(400).send(err);
-      }
-      res.send(data);
+    fs.unlink(req.files.imageCover[0].path, (err) => {
+      console.log(err);
     });
-  });
+    fs.unlink(req.files.image1[0].path, (err) => {
+      console.log(err);
+    });
+    fs.unlink(req.files.image2[0].path, (err) => {
+      console.log(err);
+    });
+    fs.unlink(req.files.image3[0].path, (err) => {
+      console.log(err);
+    });
+
+    // Create new tour
+    let tour = new TravelAgencytour({
+      name: req.body.name,
+      duration: req.body.duration,
+      ratingsAverage: req.body.ratingsAverage,
+      ratingsQuantity: req.body.ratingsQuantity,
+      price: req.body.price,
+      summary: req.body.summary,
+      description: req.body.description,
+      startDates: req.body.startDates,
+      startLocation: req.body.startLocation,
+      imageCover: imageCover.secure_url,
+      image1: image1.secure_url,
+      image2: image2.secure_url,
+      image3: image3.secure_url,
+
+      travelAgency: req.body.travelAgency,
+    });
+    // Save guide
+    await tour.save();
+
+    res.status(201).json(tour);
+  } catch (e) {
+    res.status(500).json({ message: e.message });
+  }
 };
 
-exports.allTours = (req, res) => {
-  TravelAgencytour.find({}, (err, tours) => {
-    if (err) {
-      res.status(400).json(err);
+exports.allTours = async (req, res) => {
+  try {
+    let tour = req.query.tour ? req.query.tour : "asc";
+    let sortBy = req.query.sortBy ? req.query.sortBy : "_id";
+    let limit = req.query.limit ? parseInt(req.query.limit) : 6;
+
+    const tours = await TravelAgencytour.find({})
+      .sort([[sortBy, tour]])
+      .limit(limit);
+    if (!tours) {
+      res.status(404).send("tourss not found");
     }
     res.status(200).send(tours);
-  });
+  } catch (e) {
+    res.status(500).send(e);
+  }
 };
 
 exports.tourByid = async (req, res) => {
@@ -96,5 +130,23 @@ exports.remove = async (req, res) => {
     res.send("travelagencytour removed successfully!");
   } catch (e) {
     res.status(500).send();
+  }
+};
+
+exports.updateTour = async (req, res) => {
+  try {
+    let tour = await TravelAgencytour.findById(req.params.id);
+    if (!tour) {
+      return res.status(404).send("tour not found");
+    }
+    tour = await TravelAgencytour.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      useFindAndModify: false,
+    });
+
+    await tour.save();
+    res.status(200).send(tour);
+  } catch (e) {
+    res.status(500).send(e);
   }
 };

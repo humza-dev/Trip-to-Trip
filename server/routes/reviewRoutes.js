@@ -10,9 +10,9 @@ const {
 } = require("../controllers/reviewController");
 
 router.get("/reviews", getAllReviews);
-router.get("/review/:id", getReview);
-router.post("/reviews", createReview);
-router.patch("/review/:id", updateReview);
-router.delete("/review/:id", removeReview);
+router.get("/:id", getReview);
+router.post("/", createReview);
+router.patch("/:id", updateReview);
+router.delete("/:id", removeReview);
 
 module.exports = router;

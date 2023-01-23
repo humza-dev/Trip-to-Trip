@@ -1,56 +1,69 @@
 const SecurityAgency = require("../models/SecurityAgency");
-const formidable = require("formidable");
+
+require("../handlers/cloudinary");
 const fs = require("fs");
-exports.signup = (req, res) => {
-  let form = new formidable.IncomingForm();
-  form.keepExtensions = true;
-  form.parse(req, (err, fields, files) => {
-    if (err) {
-      return res.status(400).json({
-        err: "File could not be uploaded",
-      });
-    }
-    let securityagency = new SecurityAgency(fields);
-    if (files.companylicense) {
-      if (files.companylicense.size > 1000000) {
-        return res.status(400).json({ error: "file should be les than 1mb" });
-      }
-      const { agencyname, email, password, address, phonenumber } = fields;
-      if (!agencyname || !email || !password || !address || !phonenumber) {
-        return res.status(400).json({
-          error: "all fields are required!",
-        });
-      }
 
-      securityagency.companylicense.data = fs.readFileSync(
-        files.companylicense.filepath
-      );
-      securityagency.companylicense.contentType = files.companylicense.mimetype;
+const cloudinary = require("cloudinary").v2;
+
+exports.signup = async (req, res) => {
+  try {
+    let { agencyname, password, email, address, phonenumber } = req.body;
+    if (!agencyname || !password || !email || !phonenumber || !address) {
+      return res.status(400).send("all fields are required");
     }
-    securityagency.save((err, result) => {
+
+    //Upload image to cloudinary
+    let result = await cloudinary.uploader.upload(req.file.path);
+    fs.unlink(req.file.path, (err) => {
       if (err) {
-        return res.status(400).json(err);
+        console.log(err);
       }
-      res.json(result);
     });
-  });
+    // Create new user
+    let securityagency = new SecurityAgency({
+      agencyname: req.body.agencyname,
+      password: req.body.password,
+      email: req.body.email,
+      address: req.body.address,
+      phonenumber: req.body.phonenumber,
+      companylicense: result.secure_url,
+    });
+    // Save user
+    await securityagency.save();
+    securityagency.password = undefined;
+    res.json(securityagency);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
 };
-exports.signin = (req, res) => {
-  const { email, password } = req.body;
-  SecurityAgency.findOne({ email }, (err, user) => {
-    if (err || !user) {
-      return res.status(400).json({
-        error: "User with following email doen't exist. Please signup",
-      });
+
+exports.signin = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    if (!email || !password) {
+      return res.status(404).send("email and password are required");
+    }
+    const securityagency = await SecurityAgency.find((e) => e.email === email);
+    if (!securityagency) {
+      return res.status(401).json({ error: "Invalid email or password" });
     }
 
-    const { _id, username, email } = SecurityAgency;
-    return res.send("login succesfully!");
-  });
+    res.status(200).send(securityagency);
+  } catch (e) {
+    res.status(500).send();
+  }
 };
 exports.signout = (req, res) => {
-  res.clearCookie("t");
-  res.json({ message: "signed out successfully" });
+  try {
+    req.session.destroy((err) => {
+      if (err) {
+        return res.status(400).send(err);
+      }
+      res.redirect("logout succuess");
+    });
+  } catch (e) {
+    res.status(400).send(e);
+  }
 };
 
 exports.read = async (req, res) => {
@@ -69,25 +82,44 @@ exports.read = async (req, res) => {
   }
 };
 
-exports.readall = (req, res) => {
-  SecurityAgency.find({}).then((agencies) => {
-    res.status(200).send(agencies);
-  });
+exports.readall = async (req, res) => {
+  try {
+    let securityagency = req.query.securityagency
+      ? req.query.securityagency
+      : "asc";
+    let sortBy = req.query.sortBy ? req.query.sortBy : "_id";
+    let limit = req.query.limit ? parseInt(req.query.limit) : 6;
+
+    const securityagecies = await SecurityAgency.find({})
+      .sort([[sortBy, securityagency]])
+      .limit(limit);
+
+    if (!securityagecies) {
+      res.status(404).send("security agencies not found");
+    }
+    res.status(200).send(securityagecies);
+  } catch (e) {
+    res.status(500).send();
+  }
 };
 
-exports.update = (req, res) => {
-  SecurityAgency.findOneAndUpdate(
-    { _id: req.params.userID },
-    { $set: req.body },
-    { new: true },
-    (err, agency) => {
-      if (err) {
-        res.status(400).send(err);
-      }
-      agency.save();
-      res.status(200).send(agency);
+exports.update = async (req, res) => {
+  try {
+    let securityagency = await SecurityAgency.findById(req.params.userID);
+    if (!securityagency) {
+      return res.status(404).send("security agency not found");
     }
-  );
+    securityagency = await SecurityAgency.findByIdAndUpdate(
+      req.params.userID,
+      req.body,
+      { new: true, useFindAndModify: false }
+    );
+
+    await securityagency.save();
+    res.status(200).send(securityagency);
+  } catch (e) {
+    res.status(500).send(e);
+  }
 };
 
 exports.remove = async (req, res) => {

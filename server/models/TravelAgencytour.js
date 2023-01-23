@@ -31,10 +31,11 @@ const TravelAgencytourschema = mongoose.Schema({
   startlocation: {
     type: String,
   },
-  imageCover: { data: Buffer, contentType: String },
-  image1: { data: Buffer, contentType: String },
-  image2: { data: Buffer, contentType: String },
-  image3: { data: Buffer, contentType: String },
+  imageCover: { type: String },
+  image1: { type: String },
+  image2: { type: String },
+  image3: { type: String },
+
   price: { type: String, required: [true, "price must be included"] },
   ratingsAverage: {
     type: Number,
@@ -47,14 +48,6 @@ const TravelAgencytourschema = mongoose.Schema({
     type: Number,
     default: 0,
   },
-  locations: [
-    {
-      type: String,
-      address: String,
-      description: String,
-      day: Number,
-    },
-  ],
 });
 
 const TravelAgencytour = mongoose.model(

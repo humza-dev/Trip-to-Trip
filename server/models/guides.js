@@ -1,8 +1,9 @@
 const mongoose = require("mongoose");
+const validator = require("validator");
 
 const GuideScheama = new mongoose.Schema(
   {
-    name: {
+    fullname: {
       type: String,
       trim: true,
       maxlength: 50,
@@ -15,19 +16,17 @@ const GuideScheama = new mongoose.Schema(
       trim: true,
       lowercase: true,
       required: [true, "can't be blank"],
-      index: true,
+      validate: [validator.isEmail, "Please Enter a valid Email"],
+      unique: true,
     },
-    password: { type: String, trim: true, required: true },
-    passwordConfirm: {
+    password: {
       type: String,
-      required: [true, "Please confirm your password"],
-      validate: {
-        validator: function (el) {
-          return el === this.password;
-        },
-        message: "Passwords must match",
-      },
+      trim: true,
+
+      required: [true, "Please Enter Your Password"],
+      minLength: [8, "Password should be greater than 8 characters"],
     },
+
     address: { type: String, trim: true, required: true },
     phonenumber: { type: Number, trim: true, required: true },
     cnic: {
@@ -37,11 +36,16 @@ const GuideScheama = new mongoose.Schema(
       maxlength: 13,
       minlength: 13,
     },
-    guidelicense: { data: Buffer, contentType: String },
-    photo: { data: Buffer, contentType: String },
-    isAvalaible: Boolean,
+    guidelicense: { type: String },
+    avatar: {
+      type: String,
+    },
+
+    isAvalaible: { type: Boolean },
   },
   { timestamps: true }
 );
+
+//TODO PASSWORD HASH AND COMPARE
 
 module.exports = mongoose.model("Guide", GuideScheama);
