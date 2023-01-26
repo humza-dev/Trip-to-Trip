@@ -1,9 +1,6 @@
 const express = require("express");
-const upload = require("../handlers/multer");
-
 const router = express.Router();
 const {
-  signup,
   signin,
   signout,
   update,
@@ -11,13 +8,14 @@ const {
   readall,
   read,
 } = require("../controllers/userController");
+const auth = require("../middlewares/auth");
 
-router.post("/signup", upload.single("avatar"), signup);
-router.get("/signin", signin);
+router.post("/signup", auth.signup);
+router.post("/signin", auth.signin);
 router.get("/signout", signout);
-router.get("/:userID", read);
+router.get("/:id", read);
 router.get("users", readall);
-router.patch("/:userID", upload.single("avatar"), update);
-router.delete("/:userID", remove);
+router.patch("/:id", update);
+router.delete("/:id", remove);
 
 module.exports = router;

@@ -11,10 +11,11 @@ const tourSchema = new mongoose.Schema(
     duration: { type: Number, required: true },
     ratingsAverage: {
       type: Number,
-      default: 4.5,
+      default: 1,
       min: [1, "rating must be greater than 1"],
       max: [5, "rating must be less than 6"],
-      set: (val) => Math.round(val * 10) / 10,
+
+      //set: (val) => Math.round(val * 10) / 10,
     },
     ratingsQuantity: {
       type: Number,
@@ -36,9 +37,6 @@ const tourSchema = new mongoose.Schema(
     image1: { type: String },
     image2: { type: String },
     image3: { type: String },
-    imageCovercloudinary_id: {
-      type: String,
-    },
 
     startDates: {
       type: Date,

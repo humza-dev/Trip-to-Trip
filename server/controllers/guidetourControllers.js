@@ -94,34 +94,109 @@ exports.createTour = async (req, res) => {
 
 exports.updateTour = async (req, res) => {
   try {
-    let guidetour = await Tour.findById(req.params.id);
-    if (!guidetour) {
-      return res.status(404).send("cant find tour");
+    const {
+      name,
+      duration,
+      ratingsAverage,
+      ratingsQuantity,
+      price,
+      summary,
+      description,
+      startDates,
+      guide,
+      startLocation,
+    } = req.body;
+
+    const tour = await Tour.findById(req.params.id);
+    if (!tour) {
+      return res.status(404).json({ message: "Tour not found" });
     }
 
-    guidetour = await Tour.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-      useFindAndModify: false,
+    let imageCoverURL = null;
+    let image1URL = null;
+    let image2URL = null;
+    let image3URL = null;
+
+    if (req.files.imageCover) {
+      const imageCover = await cloudinary.uploader.upload(
+        req.files.imageCover[0].path
+      );
+      imageCoverURL = imageCover.secure_url;
+
+      fs.unlink(req.files.imageCover[0].path, (err) => {
+        if (err) {
+          console.log(err);
+        }
+      });
+    }
+    if (req.files.image1) {
+      const image1 = await cloudinary.uploader.upload(req.files.image1[0].path);
+      image1URL = image1.secure_url;
+
+      fs.unlink(req.files.image1[0].path, (err) => {
+        if (err) {
+          console.log(err);
+        }
+      });
+    }
+
+    if (req.files.image2) {
+      const image2 = await cloudinary.uploader.upload(req.files.image2[0].path);
+      image2URL = image2.secure_url;
+
+      fs.unlink(req.files.image2[0].path, (err) => {
+        if (err) {
+          console.log(err);
+        }
+      });
+    }
+    if (req.files.image3) {
+      const image3 = await cloudinary.uploader.upload(req.files.image3[0].path);
+      image3URL = image3.secure_url;
+
+      fs.unlink(req.files.image3[0].path, (err) => {
+        if (err) {
+          console.log(err);
+        }
+      });
+    }
+
+    const updatedTour = await Tour.findByIdAndUpdate(req.params.id, {
+      name,
+      duration,
+      ratingsAverage,
+      ratingsQuantity,
+      price,
+      summary,
+      description,
+      startDates,
+      startLocation,
+      guide,
+      imageCover: imageCoverURL,
+      image1: image1URL,
+      image2: image2URL,
+      image3: image3URL,
     });
 
-    await guidetour.save();
-    res.status(200).send(guidetour);
+    await updatedTour.save();
+    res.status(200).json("tour updated successfully");
   } catch (e) {
+    console.log(e);
+
     res.status(500).send(e);
   }
 };
 
 exports.remove = async (req, res) => {
   try {
-    const tour = await Tour.findOneAndDelete({
-      _id: req.params.id,
-    });
+    const tour = await Tour.findById(req.params.id);
 
     if (!tour) {
-      res.status(404).send("tour not found");
+      return res.status(404).json({ message: "Tour not found" });
     }
 
-    res.send("tour removed successfully!");
+    Tour.findByIdAndDelete(req.params.id);
+    res.status(200).json("tour deleted successfully");
   } catch (e) {
     res.status(500).send();
   }
@@ -129,15 +204,11 @@ exports.remove = async (req, res) => {
 
 exports.tourByid = async (req, res) => {
   try {
-    const tour = await Tour.findOne({
-      _id: req.params.id,
-    });
-
+    const tour = await Tour.findById(req.params.id);
     if (!tour) {
-      return res.status(404).send("tour doesn't exist");
+      return res.status(404).json({ message: "Tour not found" });
     }
-
-    res.send(tour);
+    res.status(200).json(tour);
   } catch (error) {
     res.status(500).send("Internal server error");
   }

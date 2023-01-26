@@ -306,3 +306,237 @@ server\routes\travelagencyRoutes.js, code is 20, comment is 0, blank is 3.
 server\routes\travelAgencyTourRoutes.js, code is 34, comment is 0, blank is 3.
 server\routes\userRoutes.js, code is 20, comment is 0, blank is 3.
 ===============================================================================
+===============================================================================
+EXTENSION NAME : linecounter
+EXTENSION VERSION : 0.2.7
+-------------------------------------------------------------------------------
+count time : 2023-01-24 11:44:09
+count workspace : c:\work\Trip to Trip
+total files : 33
+total code lines : 9406
+total comment lines : 132
+total blank lines : 295
+
+    statistics
+   |      extension|     total code|  total comment|    total blank|percent|
+   -------------------------------------------------------------------------
+   |            .js|           1567|             54|            202|     17|
+   |          .json|           7603|              0|              2|     81|
+   |           .txt|            226|             77|             91|    2.4|
+   |               |             10|              1|              0|   0.11|
+   -------------------------------------------------------------------------
+frontend\images\icon.jpg, it is a binary file.
+server\.env, code is 8, comment is 1, blank is 0.
+server\.gitignore, code is 2, comment is 0, blank is 0.
+server\controllers\auth.js, code is 2, comment is 0, blank is 0.
+server\controllers\d.txt, code is 226, comment is 77, blank is 91.
+server\controllers\guidesController.js, code is 169, comment is 8, blank is 22.
+server\controllers\guidetourControllers.js, code is 201, comment is 8, blank is 24.
+server\controllers\reviewController.js, code is 73, comment is 0, blank is 9.
+server\controllers\securityagencyController.js, code is 131, comment is 3, blank is 21.
+server\controllers\travelagencyControllers.js, code is 129, comment is 3, blank is 18.
+server\controllers\travelagencyTourController.js, code is 194, comment is 8, blank is 25.
+server\controllers\userController.js, code is 123, comment is 8, blank is 22.
+server\Database\db.js, code is 10, comment is 0, blank is 1.
+server\handlers\cloudinary.js, code is 7, comment is 0, blank is 1.
+server\handlers\multer.js, code is 25, comment is 4, blank is 3.
+server\index.js, code is 29, comment is 3, blank is 9.
+server\models\bookingGuide.js, code is 28, comment is 0, blank is 1.
+server\models\guides.js, code is 44, comment is 1, blank is 6.
+server\models\guideTour.js, code is 47, comment is 1, blank is 4.
+server\models\review.js, code is 27, comment is 0, blank is 1.
+server\models\SecurityAgency.js, code is 32, comment is 1, blank is 4.
+server\models\TravelAgency.js, code is 32, comment is 1, blank is 3.
+server\models\TravelAgencytour.js, code is 54, comment is 1, blank is 2.
+server\models\users.js, code is 33, comment is 4, blank is 4.
+server\package-lock.json, code is 7565, comment is 0, blank is 2.
+server\package.json, code is 38, comment is 0, blank is 0.
+server\routes\guidesRoutes.js, code is 34, comment is 0, blank is 2.
+server\routes\guidetourRoutes.js, code is 34, comment is 0, blank is 4.
+server\routes\reviewRoutes.js, code is 15, comment is 0, blank is 3.
+server\routes\securityAgencyRoutes.js, code is 20, comment is 0, blank is 4.
+server\routes\travelagencyRoutes.js, code is 20, comment is 0, blank is 3.
+server\routes\travelAgencyTourRoutes.js, code is 34, comment is 0, blank is 3.
+server\routes\userRoutes.js, code is 20, comment is 0, blank is 3.
+===============================================================================
+===============================================================================
+EXTENSION NAME : linecounter
+EXTENSION VERSION : 0.2.7
+-------------------------------------------------------------------------------
+count time : 2023-01-24 17:34:17
+count workspace : c:\work\Trip to Trip
+total files : 40
+total code lines : 9700
+total comment lines : 136
+total blank lines : 325
+
+    statistics
+   |      extension|     total code|  total comment|    total blank|percent|
+   -------------------------------------------------------------------------
+   |            .js|           1861|             58|            232|     19|
+   |          .json|           7603|              0|              2|     78|
+   |               |             10|              1|              0|   0.10|
+   |           .txt|            226|             77|             91|    2.3|
+   -------------------------------------------------------------------------
+frontend\images\icon.jpg, it is a binary file.
+server\.env, code is 8, comment is 1, blank is 0.
+server\.gitignore, code is 2, comment is 0, blank is 0.
+server\controllers\auth.js, code is 2, comment is 0, blank is 0.
+server\controllers\d.txt, code is 226, comment is 77, blank is 91.
+server\controllers\GuideHiringController.js, code is 79, comment is 2, blank is 9.
+server\controllers\guidesController.js, code is 169, comment is 8, blank is 22.
+server\controllers\guidetourControllers.js, code is 201, comment is 8, blank is 24.
+server\controllers\reviewController.js, code is 73, comment is 0, blank is 9.
+server\controllers\securityagencyController.js, code is 131, comment is 3, blank is 21.
+server\controllers\TravelAgencyBookingController.js, code is 78, comment is 0, blank is 10.
+server\controllers\travelagencyControllers.js, code is 129, comment is 3, blank is 18.
+server\controllers\travelagencyTourController.js, code is 194, comment is 8, blank is 26.
+server\controllers\userController.js, code is 120, comment is 8, blank is 21.
+server\Database\db.js, code is 10, comment is 0, blank is 1.
+server\handlers\cloudinary.js, code is 7, comment is 0, blank is 1.
+server\handlers\multer.js, code is 25, comment is 4, blank is 3.
+server\index.js, code is 33, comment is 3, blank is 9.
+server\models\bookingGuide.js, code is 28, comment is 0, blank is 1.
+server\models\GuideHiring.js, code is 31, comment is 0, blank is 1.
+server\models\guides.js, code is 44, comment is 1, blank is 6.
+server\models\guideTour.js, code is 47, comment is 1, blank is 4.
+server\models\review.js, code is 27, comment is 0, blank is 1.
+server\models\SecurityAgency.js, code is 32, comment is 1, blank is 4.
+server\models\SecurityHiring.js, code is 41, comment is 0, blank is 2.
+server\models\TravelAgency.js, code is 32, comment is 1, blank is 3.
+server\models\TravelAgencyBooking.js, code is 34, comment is 0, blank is 2.
+server\models\TravelAgencytour.js, code is 54, comment is 1, blank is 2.
+server\models\users.js, code is 33, comment is 4, blank is 4.
+server\package-lock.json, code is 7565, comment is 0, blank is 2.
+server\package.json, code is 38, comment is 0, blank is 0.
+server\routes\GuideHiringRoutes.js, code is 15, comment is 1, blank is 3.
+server\routes\guidesRoutes.js, code is 34, comment is 0, blank is 2.
+server\routes\guidetourRoutes.js, code is 34, comment is 0, blank is 4.
+server\routes\reviewRoutes.js, code is 15, comment is 0, blank is 3.
+server\routes\securityAgencyRoutes.js, code is 20, comment is 0, blank is 4.
+server\routes\TravelAgencyBookingRoutes.js, code is 15, comment is 1, blank is 3.
+server\routes\travelagencyRoutes.js, code is 20, comment is 0, blank is 3.
+server\routes\travelAgencyTourRoutes.js, code is 34, comment is 0, blank is 3.
+server\routes\userRoutes.js, code is 20, comment is 0, blank is 3.
+===============================================================================
+===============================================================================
+EXTENSION NAME : linecounter
+EXTENSION VERSION : 0.2.7
+-------------------------------------------------------------------------------
+count time : 2023-01-24 17:57:24
+count workspace : c:\work\Trip to Trip
+total files : 40
+total code lines : 9700
+total comment lines : 136
+total blank lines : 325
+
+    statistics
+   |      extension|     total code|  total comment|    total blank|percent|
+   -------------------------------------------------------------------------
+   |            .js|           1861|             58|            232|     19|
+   |          .json|           7603|              0|              2|     78|
+   |           .txt|            226|             77|             91|    2.3|
+   |               |             10|              1|              0|   0.10|
+   -------------------------------------------------------------------------
+frontend\images\icon.jpg, it is a binary file.
+server\.env, code is 8, comment is 1, blank is 0.
+server\.gitignore, code is 2, comment is 0, blank is 0.
+server\controllers\auth.js, code is 2, comment is 0, blank is 0.
+server\controllers\d.txt, code is 226, comment is 77, blank is 91.
+server\controllers\GuideHiringController.js, code is 79, comment is 2, blank is 9.
+server\controllers\guidesController.js, code is 169, comment is 8, blank is 22.
+server\controllers\guidetourControllers.js, code is 201, comment is 8, blank is 24.
+server\controllers\reviewController.js, code is 73, comment is 0, blank is 9.
+server\controllers\securityagencyController.js, code is 131, comment is 3, blank is 21.
+server\controllers\TravelAgencyBookingController.js, code is 78, comment is 0, blank is 10.
+server\controllers\travelagencyControllers.js, code is 129, comment is 3, blank is 18.
+server\controllers\travelagencyTourController.js, code is 194, comment is 8, blank is 26.
+server\controllers\userController.js, code is 120, comment is 8, blank is 21.
+server\Database\db.js, code is 10, comment is 0, blank is 1.
+server\handlers\cloudinary.js, code is 7, comment is 0, blank is 1.
+server\handlers\multer.js, code is 25, comment is 4, blank is 3.
+server\index.js, code is 33, comment is 3, blank is 9.
+server\models\bookingGuide.js, code is 28, comment is 0, blank is 1.
+server\models\GuideHiring.js, code is 31, comment is 0, blank is 1.
+server\models\guides.js, code is 44, comment is 1, blank is 6.
+server\models\guideTour.js, code is 47, comment is 1, blank is 4.
+server\models\review.js, code is 27, comment is 0, blank is 1.
+server\models\SecurityAgency.js, code is 32, comment is 1, blank is 4.
+server\models\SecurityHiring.js, code is 41, comment is 0, blank is 2.
+server\models\TravelAgency.js, code is 32, comment is 1, blank is 3.
+server\models\TravelAgencyBooking.js, code is 34, comment is 0, blank is 2.
+server\models\TravelAgencytour.js, code is 54, comment is 1, blank is 2.
+server\models\users.js, code is 33, comment is 4, blank is 4.
+server\package-lock.json, code is 7565, comment is 0, blank is 2.
+server\package.json, code is 38, comment is 0, blank is 0.
+server\routes\GuideHiringRoutes.js, code is 15, comment is 1, blank is 3.
+server\routes\guidesRoutes.js, code is 34, comment is 0, blank is 2.
+server\routes\guidetourRoutes.js, code is 34, comment is 0, blank is 4.
+server\routes\reviewRoutes.js, code is 15, comment is 0, blank is 3.
+server\routes\securityAgencyRoutes.js, code is 20, comment is 0, blank is 4.
+server\routes\TravelAgencyBookingRoutes.js, code is 15, comment is 1, blank is 3.
+server\routes\travelagencyRoutes.js, code is 20, comment is 0, blank is 3.
+server\routes\travelAgencyTourRoutes.js, code is 34, comment is 0, blank is 3.
+server\routes\userRoutes.js, code is 20, comment is 0, blank is 3.
+===============================================================================
+===============================================================================
+EXTENSION NAME : linecounter
+EXTENSION VERSION : 0.2.7
+-------------------------------------------------------------------------------
+count time : 2023-01-25 11:18:37
+count workspace : c:\work\Trip to Trip
+total files : 41
+total code lines : 9753
+total comment lines : 141
+total blank lines : 354
+
+    statistics
+   |      extension|     total code|  total comment|    total blank|percent|
+   -------------------------------------------------------------------------
+   |            .js|           1914|             63|            261|     20|
+   |          .json|           7603|              0|              2|     78|
+   |               |             10|              1|              0|   0.10|
+   |           .txt|            226|             77|             91|    2.3|
+   -------------------------------------------------------------------------
+frontend\images\icon.jpg, it is a binary file.
+server\.env, code is 8, comment is 1, blank is 0.
+server\.gitignore, code is 2, comment is 0, blank is 0.
+server\controllers\auth.js, code is 2, comment is 0, blank is 0.
+server\controllers\d.txt, code is 226, comment is 77, blank is 91.
+server\controllers\GuideHiringController.js, code is 75, comment is 2, blank is 13.
+server\controllers\guidesController.js, code is 169, comment is 8, blank is 22.
+server\controllers\guidetourControllers.js, code is 201, comment is 8, blank is 24.
+server\controllers\reviewController.js, code is 73, comment is 0, blank is 9.
+server\controllers\securityagencyController.js, code is 131, comment is 3, blank is 21.
+server\controllers\SecurityHiringController.js, code is 71, comment is 5, blank is 18.
+server\controllers\TravelAgencyBookingController.js, code is 74, comment is 0, blank is 16.
+server\controllers\travelagencyControllers.js, code is 129, comment is 3, blank is 18.
+server\controllers\travelagencyTourController.js, code is 194, comment is 8, blank is 26.
+server\controllers\userController.js, code is 120, comment is 8, blank is 21.
+server\Database\db.js, code is 10, comment is 0, blank is 1.
+server\handlers\cloudinary.js, code is 7, comment is 0, blank is 1.
+server\handlers\multer.js, code is 25, comment is 4, blank is 3.
+server\index.js, code is 35, comment is 3, blank is 9.
+server\models\GuideHiring.js, code is 36, comment is 0, blank is 1.
+server\models\guides.js, code is 44, comment is 1, blank is 6.
+server\models\guideTour.js, code is 47, comment is 1, blank is 4.
+server\models\review.js, code is 27, comment is 0, blank is 1.
+server\models\SecurityAgency.js, code is 32, comment is 1, blank is 4.
+server\models\SecurityHiring.js, code is 37, comment is 0, blank is 1.
+server\models\TravelAgency.js, code is 32, comment is 1, blank is 3.
+server\models\TravelAgencyBooking.js, code is 34, comment is 0, blank is 2.
+server\models\TravelAgencytour.js, code is 54, comment is 1, blank is 2.
+server\models\users.js, code is 33, comment is 4, blank is 4.
+server\package-lock.json, code is 7565, comment is 0, blank is 2.
+server\package.json, code is 38, comment is 0, blank is 0.
+server\routes\GuideHiringRoutes.js, code is 15, comment is 1, blank is 3.
+server\routes\guidesRoutes.js, code is 34, comment is 0, blank is 2.
+server\routes\guidetourRoutes.js, code is 34, comment is 0, blank is 4.
+server\routes\reviewRoutes.js, code is 15, comment is 0, blank is 3.
+server\routes\securityAgencyRoutes.js, code is 20, comment is 0, blank is 4.
+server\routes\SecurityHiringRoutes.js, code is 15, comment is 0, blank is 3.
+server\routes\TravelAgencyBookingRoutes.js, code is 15, comment is 1, blank is 3.
+server\routes\travelagencyRoutes.js, code is 20, comment is 0, blank is 3.
+server\routes\travelAgencyTourRoutes.js, code is 34, comment is 0, blank is 3.
+server\routes\userRoutes.js, code is 20, comment is 0, blank is 3.
+===============================================================================

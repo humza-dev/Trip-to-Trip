@@ -68,7 +68,7 @@ exports.signout = (req, res) => {
 
 exports.read = async (req, res) => {
   try {
-    const securityagency = await SecurityAgency.findOne({
+    const securityagency = await SecurityAgency.findById({
       _id: req.params.userID,
     });
 
@@ -95,7 +95,7 @@ exports.readall = async (req, res) => {
       .limit(limit);
 
     if (!securityagecies) {
-      res.status(404).send("security agencies not found");
+      return res.status(404).send("security agencies not found");
     }
     res.status(200).send(securityagecies);
   } catch (e) {
@@ -105,20 +105,36 @@ exports.readall = async (req, res) => {
 
 exports.update = async (req, res) => {
   try {
-    let securityagency = await SecurityAgency.findById(req.params.userID);
-    if (!securityagency) {
-      return res.status(404).send("security agency not found");
-    }
-    securityagency = await SecurityAgency.findByIdAndUpdate(
-      req.params.userID,
-      req.body,
-      { new: true, useFindAndModify: false }
-    );
+    const { agencyname, email, password, address, phonenumber } = req.body;
+    const securityagency = await SecurityAgency.findById(req.params.userID);
 
-    await securityagency.save();
-    res.status(200).send(securityagency);
-  } catch (e) {
-    res.status(500).send(e);
+    if (!securityagency) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    const id = req.params.userID;
+
+    if (req.file) {
+      const result = await cloudinary.uploader.upload(req.file.path);
+      securityagency.companylicense = result.secure_url;
+    }
+    fs.unlink(req.file.path, (err) => {
+      console.log(err);
+    });
+    const UpdatedSecurityAgency = await SecurityAgency.findOneAndUpdate(id, {
+      agencyname,
+      email,
+      password,
+      address,
+      phonenumber,
+      companylicense: securityagency.companylicense,
+    });
+
+    await UpdatedSecurityAgency.save();
+
+    return res.status(200).json({ message: "agency updated successfully" });
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
   }
 };
 
@@ -129,7 +145,7 @@ exports.remove = async (req, res) => {
     });
 
     if (!securityagency) {
-      res.status(404).send("securityagency not found");
+      return res.status(404).send("securityagency not found");
     }
 
     res.send("securityagency removed successfully!");

@@ -7,8 +7,8 @@ require("../handlers/cloudinary");
 
 exports.signup = async (req, res) => {
   try {
-    let { fullname, password, email } = req.body;
-    if (!fullname || !password || !email) {
+    let { firstname, lastname, password, email } = req.body;
+    if (!firstname || lastname || !password || !email) {
       return res.status(400).send("all fields are required");
     }
 
@@ -16,19 +16,15 @@ exports.signup = async (req, res) => {
     // if (userExist) {
     //   return res.status(400).send("That user already exisits!");
     // }
-    //Upload image to cloudinary
-    let result = await cloudinary.uploader.upload(req.file.path);
 
-    fs.unlink(req.file.path, (err) => {
-      console.log(err);
-    });
     // Create new user
     let user = new User({
-      fullname: req.body.fullname,
+      firstname: req.body.firstname,
+      lastname: req.body.lastname,
       password: req.body.password,
       email: req.body.email,
-      avatar: result.secure_url,
     });
+    //hash password
     // Save user
     await user.save();
     user.password = undefined;
@@ -69,33 +65,33 @@ exports.signout = (req, res) => {
 
 exports.update = async (req, res) => {
   try {
-    let user = await User.findById(req.params.userID);
-    // Upload image to cloudinary
-    let result = await cloudinary.uploader.upload(req.file.path);
-    let data = {
-      fullname: req.body.fullname || user.fullname,
-      password: req.body.password,
-      email: req.body.email,
-      avatar: result.secure_url || user.avatar,
-    };
-    user = await User.findByIdAndUpdate(req.params.userID, data, {
-      new: true,
-    });
-    res.json(user);
-  } catch (e) {
-    res.status(500).send(e);
+    const { firstname, lastname, email, password } = req.body;
+    const user = await User.findById(req.params.id);
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    user.firstname = firstname || user.firstname;
+    user.lastname = lastname || user.lastname;
+    user.email = email;
+    user.password = password;
+
+    await user.save();
+
+    return res.status(200).json({ message: "User updated successfully" });
+  } catch (err) {
+    return res.status(500).json({ message: "Error updating user", error: err });
   }
 };
 
 exports.remove = async (req, res) => {
   try {
-    let user = await User.findOneAndDelete({
-      _id: req.params.userID,
-    });
-
-    if (!user) {
-      res.status(404).send("user not found");
+    let userExist = await User.findById(req.params.id);
+    if (!userExist) {
+      return res.status(404).json({ message: "User not found" });
     }
+    await User.findByIdAndDelete(req.params.id);
 
     res.send("user removed successfully!");
   } catch (e) {
@@ -107,12 +103,12 @@ exports.read = async (req, res) => {
   const id = req.params.userID;
 
   try {
-    const user = await User.findById({ _id: id });
-    await cloudinary.uploader.destroy(user.cloudinary_id);
+    const userExist = await User.findById(id);
 
-    if (!user) {
-      res.status(404).send("tour not found");
+    if (!userExist) {
+      return res.status(404).send("tour not found");
     }
+    const user = await User.findById(id);
 
     user.password = undefined;
     res.send(user);
@@ -131,7 +127,7 @@ exports.readall = async (req, res) => {
       .sort([[sortBy, user]])
       .limit(limit);
     if (!users) {
-      res.status(404).send("users not found");
+      return res.status(404).send("users not found");
     }
     res.status(200).send(users);
   } catch (e) {

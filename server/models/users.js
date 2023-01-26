@@ -3,11 +3,17 @@ const validator = require("validator");
 
 const userSchmea = new mongoose.Schema(
   {
-    fullname: {
+    firstname: {
       type: String,
-      // trim: true,
-      // maxlength: 50,
-      //lowercase: true,
+      trim: true,
+      maxlength: 50,
+      lowercase: true,
+    },
+    lastname: {
+      type: String,
+      trim: true,
+      maxlength: 50,
+      lowercase: true,
     },
     email: {
       type: String,
@@ -19,18 +25,18 @@ const userSchmea = new mongoose.Schema(
     },
     password: {
       type: String,
-      trim: true,
+
       required: [true, "Please Enter Your Password"],
       minLength: [8, "Password should be greater than 8 characters"],
-    },
-    avatar: {
-      type: String,
     },
 
     role: {
       type: String,
       enum: ["user", "admin"],
       default: "user",
+    },
+    tokens: {
+      token: String,
     },
   },
   { timestamps: true }

@@ -9,7 +9,7 @@ exports.getAllReviews = async (req, res) => {
       .sort([[sortBy, review]])
       .limit(limit);
     if (!reviews) {
-      res.status(404).send("reviews not found");
+      return res.status(404).send("reviews not found");
     }
     res.status(200).send(reviews);
   } catch (e) {
@@ -48,12 +48,12 @@ exports.createReview = async (req, res) => {
 
 exports.removeReview = async (req, res) => {
   try {
-    const review = await Review.findOneAndDelete({
+    const review = await Review.findByAndDelete({
       _id: req.params.id,
     });
 
     if (!review) {
-      res.status(404).send("review not found");
+      return res.status(404).send("review not found");
     }
 
     res.send("review removed successfully!");
@@ -63,19 +63,18 @@ exports.removeReview = async (req, res) => {
 };
 exports.updateReview = async (req, res) => {
   try {
-    const review = await Review.findByIdAndUpdate(
-      { _id: req.params.id },
-      { $set: req.body },
+    const { review, rating, tour, user, createdAt } = req.body;
+
+    const reviewExist = await Review.findById(req.params.id);
+    if (!reviewExist) {
+      return res.status(404).send("review not found");
+    }
+    const updatedReview = await Review.findByIdAndUpdate(
+      req.params.id,
+      { review, rating, tour, user, createdAt },
       { new: true }
     );
-    if (req.body.rating > 5 || req.body.rating < 1) {
-      res.status(400).json("review should be between 1 and 5");
-    } else if (!review) {
-      res.status(404).send("review not found");
-    } else {
-      review.save();
-      res.status(201).send(review);
-    }
+    res.status(200).send(updatedReview);
   } catch (e) {
     res.status(500).send(e);
   }

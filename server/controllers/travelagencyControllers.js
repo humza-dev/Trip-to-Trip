@@ -90,7 +90,7 @@ exports.readall = async (req, res) => {
       .sort([[sortBy, travelagency]])
       .limit(limit);
     if (!travelagencies) {
-      res.status(404).send("travel agencies not found");
+      return res.status(404).send("travel agencies not found");
     }
 
     res.status(200).send(travelagencies);
@@ -101,24 +101,36 @@ exports.readall = async (req, res) => {
 
 exports.update = async (req, res) => {
   try {
-    let travelagency = await TravelAgency.findById(req.params.userID);
+    const { agencyname, email, password, address, phonenumber } = req.body;
+    const travelagency = await TravelAgency.findById(req.params.userID);
+
     if (!travelagency) {
-      return res.status(404).send("travel agency not found!");
+      return res.status(404).json({ message: "User not found" });
     }
 
-    travelagency = await TravelAgency.findByIdAndUpdate(
-      req.params.userID,
-      req.body,
-      {
-        new: true,
-        useFindAndModify: false,
-      }
-    );
+    const id = req.params.userID;
 
-    await travelagency.save();
-    res.status(200).send(travelagency);
-  } catch (e) {
-    res.status(500).send(e);
+    if (req.file) {
+      const result = await cloudinary.uploader.upload(req.file.path);
+      travelagency.companylicense = result.secure_url;
+    }
+    fs.unlink(req.file.path, (err) => {
+      console.log(err);
+    });
+    const UpdatedTravelAgency = await TravelAgency.findOneAndUpdate(id, {
+      agencyname,
+      email,
+      password,
+      address,
+      phonenumber,
+      companylicense: travelagency.companylicense,
+    });
+
+    await UpdatedTravelAgency.save();
+
+    return res.status(200).json({ message: "agency updated successfully" });
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
   }
 };
 exports.remove = async (req, res) => {
@@ -128,7 +140,7 @@ exports.remove = async (req, res) => {
     });
 
     if (!travelagency) {
-      res.status(404).send("travelagency not found");
+      return res.status(404).send("travelagency not found");
     }
 
     res.send("travelagency removed successfully!");

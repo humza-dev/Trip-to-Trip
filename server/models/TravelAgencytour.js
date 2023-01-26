@@ -42,7 +42,7 @@ const TravelAgencytourschema = mongoose.Schema({
     default: 4.5,
     min: [1, "rating must be atleast 1"],
     max: [5, "rating must be atleast 5"],
-    set: (val) => Math.round(val * 10) / 10,
+    //set: (val) => Math.round(val * 10) / 10,
   },
   ratingsQuantity: {
     type: Number,

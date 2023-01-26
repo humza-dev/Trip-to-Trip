@@ -47,16 +47,16 @@ exports.createTour = async (req, res) => {
     let image3 = await cloudinary.uploader.upload(req.files.image3[0].path);
 
     fs.unlink(req.files.imageCover[0].path, (err) => {
-      console.log(err);
+      res.status(err);
     });
     fs.unlink(req.files.image1[0].path, (err) => {
-      console.log(err);
+      res.status(err);
     });
     fs.unlink(req.files.image2[0].path, (err) => {
-      console.log(err);
+      res.status(err);
     });
     fs.unlink(req.files.image3[0].path, (err) => {
-      console.log(err);
+      res.status(err);
     });
 
     // Create new tour
@@ -96,7 +96,7 @@ exports.allTours = async (req, res) => {
       .sort([[sortBy, tour]])
       .limit(limit);
     if (!tours) {
-      res.status(404).send("tourss not found");
+      return res.status(404).send("tourss not found");
     }
     res.status(200).send(tours);
   } catch (e) {
@@ -109,7 +109,7 @@ exports.tourByid = async (req, res) => {
     const tour = await TravelAgencytour.findById({ _id: req.params.id });
 
     if (!tour) {
-      res.status(404).send("tour not found");
+      return res.status(404).send("tour not found");
     }
     res.send(tour);
   } catch (e) {
@@ -124,7 +124,7 @@ exports.remove = async (req, res) => {
     });
 
     if (!travelagencytour) {
-      res.status(404).send("travelagencytour not found");
+      return res.status(404).send("travelagencytour not found");
     }
 
     res.send("travelagencytour removed successfully!");
@@ -135,18 +135,99 @@ exports.remove = async (req, res) => {
 
 exports.updateTour = async (req, res) => {
   try {
-    let tour = await TravelAgencytour.findById(req.params.id);
-    if (!tour) {
+    const {
+      name,
+      duration,
+      ratingsAverage,
+      ratingsQuantity,
+      price,
+      summary,
+      description,
+      startDates,
+      travelAgency,
+      startLocation,
+    } = req.body;
+
+    const tourExist = await TravelAgencytour.findById(req.params.id);
+    if (!tourExist) {
       return res.status(404).send("tour not found");
     }
-    tour = await TravelAgencytour.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-      useFindAndModify: false,
-    });
 
-    await tour.save();
-    res.status(200).send(tour);
+    let imageCoverURL = null;
+    let image1URL = null;
+    let image2URL = null;
+    let image3URL = null;
+
+    if (req.files.imageCover) {
+      const imageCover = await cloudinary.uploader.upload(
+        req.files.imageCover[0].path
+      );
+      imageCoverURL = imageCover.secure_url;
+
+      fs.unlink(req.files.imageCover[0].path, (err) => {
+        if (err) {
+          console.log(err);
+        }
+      });
+    }
+    if (req.files.image1) {
+      const image1 = await cloudinary.uploader.upload(req.files.image1[0].path);
+      image1URL = image1.secure_url;
+
+      fs.unlink(req.files.image1[0].path, (err) => {
+        if (err) {
+          console.log(err);
+        }
+      });
+    }
+
+    if (req.files.image2) {
+      const image2 = await cloudinary.uploader.upload(req.files.image2[0].path);
+      image2URL = image2.secure_url;
+
+      fs.unlink(req.files.image2[0].path, (err) => {
+        if (err) {
+          console.log(err);
+        }
+      });
+    }
+    if (req.files.image3) {
+      const image3 = await cloudinary.uploader.upload(req.files.image3[0].path);
+      image3URL = image3.secure_url;
+
+      fs.unlink(req.files.image3[0].path, (err) => {
+        if (err) {
+          console.log(err);
+        }
+      });
+    }
+
+    const updatedTour = await TravelAgencytour.findByIdAndUpdate(
+      req.params.id,
+      {
+        name,
+        duration,
+        ratingsAverage,
+        ratingsQuantity,
+        price,
+        summary,
+        description,
+        startDates,
+        startLocation,
+        travelAgency,
+        imageCover: imageCoverURL,
+        image1: image1URL,
+        image2: image2URL,
+        image3: image3URL,
+      }
+    );
+
+    await updatedTour.save();
+
+    res.status(200).json("tour updated successfully");
   } catch (e) {
-    res.status(500).send(e);
+    console.log(e);
+
+    res.status(500).json({ message: e.message });
   }
 };

@@ -118,7 +118,7 @@ exports.readall = async (req, res) => {
       .limit(limit);
 
     if (!guide) {
-      res.status(404).send("guides not found");
+      return res.status(404).send("guides not found");
     }
     res.status(200).send(guide);
   } catch (e) {
@@ -126,62 +126,78 @@ exports.readall = async (req, res) => {
   }
 };
 
-exports.update = async (req, res) => {
+exports.update = async (req, res, next) => {
   try {
-    let avatar = await cloudinary.uploader.upload(req.files.avatar[0].buffer, {
-      resource_type: "image",
+    const {
+      fullname,
+      password,
+      email,
+      address,
+      phonenumber,
+      cnic,
+      isAvalaible,
+    } = req.body;
+
+    const guide = await Guides.findById(req.params.userID);
+    if (!guide) {
+      return res.status(404).send("guide doesn't exist");
+    }
+
+    let avatarUrl = null;
+    let guidelicenseUrl = null;
+
+    if (req.files.avatar) {
+      const avatar = await cloudinary.uploader.upload(req.files.avatar[0].path);
+      avatarUrl = avatar.url;
+      fs.unlink(req.files.avatar[0].path, (err) => {
+        if (err) {
+          console.log(err);
+        }
+      });
+    }
+
+    if (req.files.guidelicense) {
+      const avatar = await cloudinary.uploader(req.files.guidelicense[0].path);
+      guidelicenseUrl = avatar.url;
+      fs.unlink(req.files.guidelicense[0].path, (err) => {
+        if (err) {
+          console.log(err);
+        }
+      });
+    }
+
+    let Updatedguide = await Guides.findByIdAndUpdate(req.params.userID, {
+      fullname,
+      password,
+      email,
+      address,
+      phonenumber,
+      cnic,
+      isAvalaible,
+      avatar: avatarUrl,
+      guidelicense: guidelicenseUrl,
     });
 
-    let guidelicense = await cloudinary.uploader.upload(
-      req.files.guidelicense[0].buffer,
-      {
-        resource_type: "raw",
-      }
-    );
+    await Updatedguide.save();
+    res.status(200).send("user updated successfully");
+  } catch (err) {
+    console.log(err);
 
-    fs.unlink(req.files.avatar[0].buffer, (err) => {
-      if (err) {
-        console.log(err);
-      }
-    });
-
-    fs.unlink(req.files.guidelicense[0].buffer, (err) => {
-      if (err) {
-        console.log(err);
-      }
-    });
-    // Create new guide
-    let guide = await Guides.findByIdAndUpdate(req.body.userID, {
-      fullname: req.body.fullname,
-      password: req.body.password,
-      email: req.body.email,
-      address: req.body.address,
-      phonenumber: req.body.phonenumber,
-      cnic: req.body.cnic,
-      isAvalaible: req.body.isAvalaible,
-      avatar: avatar.url,
-      guidelicense: guidelicense.url,
-    });
-    // Save guide
-    await guide.save();
-
-    res.status(201).json(guide);
-  } catch (e) {
-    console.log(e);
-
-    res.status(500).json({ message: e.message });
+    res.status(500).json({ error: err.message });
   }
 };
 
 exports.remove = async (req, res) => {
   try {
+    const guideExist = await Guides.findById(req.params.userID);
+
+    if (!guideExist) {
+      return res.status(404).send("guide not found");
+    }
+
     const guide = await Guides.findOneAndDelete({
       _id: req.params.userID,
     });
-
-    if (!guide) {
-      return res.status(404).send("guide not found");
-    }
 
     res.send("guide removed successfully!");
   } catch (e) {
