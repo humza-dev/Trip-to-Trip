@@ -6,7 +6,7 @@ const GuideHiringSchema = mongoose.Schema({
     required: true,
   },
   user: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: mongoose.Schema.ObjectId,
     ref: "Users",
   },
   guide: {

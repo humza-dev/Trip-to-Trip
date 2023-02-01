@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const upload = require("../handlers/multer");
-const auth = require("../middlewares/auth");
+const auth = require("../controllers/Auth");
 
 const {
   createTour,

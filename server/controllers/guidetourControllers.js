@@ -33,10 +33,6 @@ exports.createTour = async (req, res) => {
       return res.status(400).send("all fields are required");
     }
 
-    // let userExist = await Guides.findOne({ email: req.body.email });
-    // if (userExist) {
-    //   return res.status(400).send("That user already exisits!");
-    // }
     //tour images upload
     let imageCover = await cloudinary.uploader.upload(
       req.files.imageCover[0].path

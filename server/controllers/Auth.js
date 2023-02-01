@@ -1,6 +1,5 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-const promisify = require("util").promisify;
 require("../handlers/cloudinary");
 const fs = require("fs");
 const cloudinary = require("cloudinary").v2;
@@ -64,6 +63,7 @@ exports.GuideSignup = async (req, res) => {
       phonenumber,
       cnic,
       isAvalaible,
+      role,
     } = req.body;
     if (
       !firstname ||
@@ -73,7 +73,8 @@ exports.GuideSignup = async (req, res) => {
       !address ||
       !phonenumber ||
       !cnic ||
-      !isAvalaible
+      !isAvalaible ||
+      !role
     ) {
       return res.status(400).send("all fields are required");
     }
@@ -115,7 +116,7 @@ exports.GuideSignup = async (req, res) => {
       isAvalaible: req.body.isAvalaible,
       avatar: avatar.url,
       guidelicense: guidelicense.url,
-      role: req.body.role,
+      role,
     });
     // Save guide
     await guide.save();

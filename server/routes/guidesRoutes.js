@@ -1,7 +1,7 @@
 const express = require("express");
 const routes = express.Router();
 const upload = require("../handlers/multer");
-const auth = require("../middlewares/auth");
+const auth = require("../controllers/Auth");
 
 const { read, update, readall } = require("../controllers/guidesController");
 routes.post(

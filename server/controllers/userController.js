@@ -55,3 +55,8 @@ exports.read = async (req, res) => {
     res.status(500).send(e);
   }
 };
+
+exports.readMe = async (req, res, next) => {
+  req.params.id = req.user.id;
+  next();
+};
