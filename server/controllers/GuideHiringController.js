@@ -98,4 +98,3 @@ exports.userTours = async (req, res) => {
   const tours = await GuideHiring.find({ user: userId });
   res.status(200).send(tours);
 };
-//63c9068de992d754bb2ab0b4

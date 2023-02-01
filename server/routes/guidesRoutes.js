@@ -1,36 +1,32 @@
 const express = require("express");
 const routes = express.Router();
 const upload = require("../handlers/multer");
+const auth = require("../middlewares/auth");
 
-const {
-  signup,
-  signin,
-  signout,
-  read,
-  update,
-  remove,
-  readall,
-} = require("../controllers/guidesController");
+const { read, update, readall } = require("../controllers/guidesController");
 routes.post(
   "/signup",
   upload.fields([
     { name: "avatar", maxCount: 1 },
     { name: "guidelicense", maxCount: 1 },
   ]),
-  signup
+  auth.GuideSignup
 );
-routes.get("/signin", signin);
-routes.get("/signout", signout);
-routes.get("/:userID", read);
-routes.get("/guides", readall);
+routes.get("/signin", auth.signin);
+routes.get("/signout", auth.signout);
+routes.get("/:id", read);
+routes.get("/guides", auth.userAuth, auth.checkRole(["admin"]), readall);
 routes.put(
-  "/:userID",
+  "/:id",
+  auth.userAuth,
+  auth.checkRole(["admin"]),
+
   upload.fields([
     { name: "avatar", maxCount: 1 },
     { name: "guidelicense", maxCount: 1 },
   ]),
   update
 );
-routes.delete("/:userID", remove);
+routes.delete("/:id", auth.userAuth, auth.checkRole(["admin"]), auth.remove);
 
 module.exports = routes;

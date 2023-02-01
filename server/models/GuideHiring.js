@@ -11,7 +11,7 @@ const GuideHiringSchema = mongoose.Schema({
   },
   guide: {
     type: mongoose.Schema.ObjectId,
-    ref: "Guides",
+    ref: "Users",
     required: true,
   },
   price: {

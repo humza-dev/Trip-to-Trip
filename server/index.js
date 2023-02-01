@@ -1,9 +1,9 @@
 const express = require("express");
 require("dotenv").config();
-require("./Database/db"); //database
+require("./Database/db"); //!database
 const cors = require("cors");
-
 const bodyparser = require("body-parser");
+const passport = require("passport");
 
 const userRoutes = require("./routes/userRoutes");
 const securityagencyRoutes = require("./routes/securityAgencyRoutes");
@@ -25,11 +25,13 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
+app.use(bodyparser.urlencoded({ extended: true }));
 app.use(bodyparser.json());
 
-app.use(bodyparser.urlencoded({ extended: true }));
+app.use(passport.initialize());
+require("./handlers/passport")(passport);
 
-//routes
+//Routes
 app.use("/api/user", userRoutes);
 app.use("/api/securityagency", securityagencyRoutes);
 app.use("/api/securityhiring", SecurityHiringRoutes);

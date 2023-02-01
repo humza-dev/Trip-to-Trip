@@ -1,69 +1,9 @@
-const TravelAgency = require("../models/TravelAgency");
+const TravelAgency = require("../models/users");
 
 require("../handlers/cloudinary");
 const fs = require("fs");
 
 const cloudinary = require("cloudinary").v2;
-
-exports.signup = async (req, res) => {
-  try {
-    let { agencyname, password, email, address, phonenumber } = req.body;
-    if (!agencyname || !password || !email || !phonenumber || !address) {
-      return res.status(400).send("all fields are required");
-    }
-
-    //Upload image to cloudinary
-    let result = await cloudinary.uploader.upload(req.file.path);
-    fs.unlink(req.file.path, (err) => {
-      if (err) {
-        console.log(err);
-      }
-    });
-    // Create new user
-    let travelagency = new TravelAgency({
-      agencyname: req.body.agencyname,
-      password: req.body.password,
-      email: req.body.email,
-      address: req.body.address,
-      phonenumber: req.body.phonenumber,
-      companylicense: result.secure_url,
-    });
-    // Save user
-    await travelagency.save();
-    travelagency.password = undefined;
-    res.json(travelagency);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
-};
-exports.signin = async (req, res) => {
-  try {
-    const { email, password } = req.body;
-    if (!email || !password) {
-      return res.status(404).send("email and password are required");
-    }
-    const travelagency = await TravelAgency.find((e) => e.email === email);
-    if (!travelagency) {
-      return res.status(401).json({ error: "Invalid email or password" });
-    }
-
-    res.status(200).send(travelagency);
-  } catch (e) {
-    res.status(500).send();
-  }
-};
-exports.signout = (req, res) => {
-  try {
-    req.session.destroy((err) => {
-      if (err) {
-        return res.status(400).send(err);
-      }
-      res.redirect("logout succuess");
-    });
-  } catch (e) {
-    res.status(400).send(e);
-  }
-};
 
 exports.read = async (req, res) => {
   try {
@@ -102,13 +42,13 @@ exports.readall = async (req, res) => {
 exports.update = async (req, res) => {
   try {
     const { agencyname, email, password, address, phonenumber } = req.body;
-    const travelagency = await TravelAgency.findById(req.params.userID);
+    const travelagency = await TravelAgency.findById(req.params.id);
 
     if (!travelagency) {
       return res.status(404).json({ message: "User not found" });
     }
 
-    const id = req.params.userID;
+    const id = req.params.id;
 
     if (req.file) {
       const result = await cloudinary.uploader.upload(req.file.path);
@@ -131,20 +71,5 @@ exports.update = async (req, res) => {
     return res.status(200).json({ message: "agency updated successfully" });
   } catch (err) {
     return res.status(500).json({ message: err.message });
-  }
-};
-exports.remove = async (req, res) => {
-  try {
-    const travelagency = await TravelAgency.findOneAndDelete({
-      _id: req.params.userID,
-    });
-
-    if (!travelagency) {
-      return res.status(404).send("travelagency not found");
-    }
-
-    res.send("travelagency removed successfully!");
-  } catch (e) {
-    res.status(500).send();
   }
 };

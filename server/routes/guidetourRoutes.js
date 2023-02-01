@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const upload = require("../handlers/multer");
+const auth = require("../middlewares/auth");
 
 const {
   createTour,
@@ -12,7 +13,8 @@ const {
 
 router.post(
   "/createtour",
-
+  auth.userAuth,
+  auth.checkRole(["admin", "guide"]),
   upload.fields([
     { name: "imageCover", maxCount: 1 },
     { name: "image1", maxCount: 1 },
@@ -23,6 +25,8 @@ router.post(
 );
 router.patch(
   "/:id",
+  auth.userAuth,
+  auth.checkRole(["admin", "guide"]),
   upload.fields([
     { name: "imageCover", maxCount: 1 },
     { name: "image1", maxCount: 1 },
@@ -31,8 +35,18 @@ router.patch(
   ]),
   updateTour
 );
-router.delete("/:id", remove);
-router.get("/:id", tourByid);
-router.get("/guidetours", allTours);
+router.delete(
+  "/:id",
+  auth.userAuth,
+  auth.checkRole(["admin", "guide"]),
+  remove
+);
+router.get("/:id", auth.userAuth, auth.checkRole(["admin", "guide"]), tourByid);
+router.get(
+  "/guidetours",
+  auth.userAuth,
+  auth.checkRole(["admin", "guide"]),
+  allTours
+);
 
 module.exports = router;

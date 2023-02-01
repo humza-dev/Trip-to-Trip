@@ -23,16 +23,33 @@ const userSchmea = new mongoose.Schema(
       validate: [validator.isEmail, "Please Enter a valid Email"],
       unique: true,
     },
+
     password: {
       type: String,
-
       required: [true, "Please Enter Your Password"],
       minLength: [8, "Password should be greater than 8 characters"],
     },
+    address: { type: String },
+    phonenumber: { type: Number, trim: true },
+    companylicense: { type: String },
+    cnic: {
+      type: Number,
+      trim: true,
+
+      maxlength: 13,
+      minlength: 13,
+    },
+    guidelicense: { type: String },
+    avatar: {
+      type: String,
+    },
+    isAvalaible: { type: Boolean },
 
     role: {
       type: String,
-      enum: ["user", "admin"],
+      enum: ["user", "admin", "securityagency", "guide", "travelagency"],
+
+      trim: true,
       default: "user",
     },
     tokens: {

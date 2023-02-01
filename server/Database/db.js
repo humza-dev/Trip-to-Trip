@@ -7,5 +7,5 @@ mongoose
   });
 
 mongoose.connection.on("error", (err) => {
-  console.log(`Database connection error: ${err.message}`);
+  throw Error("Connection Error", err);
 });

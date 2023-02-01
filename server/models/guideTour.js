@@ -43,7 +43,7 @@ const tourSchema = new mongoose.Schema(
       default: Date.now(),
     },
     startLocation: { type: String },
-    guide: { type: mongoose.Schema.ObjectId, ref: "Guides", required: true },
+    guide: { type: mongoose.Schema.ObjectId, ref: "Users", required: true },
   },
   { timestamps: true }
 );

@@ -2386,6 +2386,279 @@
                     "filename": "server\\routes\\userRoutes.js"
                 }
             ]
+        },
+        {
+            "version": "0.2.7",
+            "counttime": "2023-01-30 11:05:14",
+            "filesum": 40,
+            "codesum": 9782,
+            "commentsum": 163,
+            "blanksum": 385,
+            "statistics": {
+                ".js": {
+                    "code": 1862,
+                    "comment": 83,
+                    "blank": 274
+                },
+                ".json": {
+                    "code": 7644,
+                    "comment": 0,
+                    "blank": 2
+                },
+                "": {
+                    "code": 12,
+                    "comment": 1,
+                    "blank": 0
+                },
+                ".txt": {
+                    "code": 264,
+                    "comment": 79,
+                    "blank": 109
+                }
+            },
+            "filelist": [
+                {
+                    "filename": "frontend\\images\\icon.jpg",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 0,
+                    "code": 8,
+                    "comment": 1,
+                    "filename": "server\\.env"
+                },
+                {
+                    "blank": 0,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "server\\.gitignore"
+                },
+                {
+                    "blank": 16,
+                    "code": 81,
+                    "comment": 4,
+                    "filename": "server\\controllers\\GuideHiringController.js"
+                },
+                {
+                    "blank": 15,
+                    "code": 89,
+                    "comment": 1,
+                    "filename": "server\\controllers\\guidesController.js"
+                },
+                {
+                    "blank": 23,
+                    "code": 202,
+                    "comment": 8,
+                    "filename": "server\\controllers\\guidetourControllers.js"
+                },
+                {
+                    "blank": 10,
+                    "code": 71,
+                    "comment": 0,
+                    "filename": "server\\controllers\\reviewController.js"
+                },
+                {
+                    "blank": 14,
+                    "code": 64,
+                    "comment": 0,
+                    "filename": "server\\controllers\\securityagencyController.js"
+                },
+                {
+                    "blank": 18,
+                    "code": 71,
+                    "comment": 5,
+                    "filename": "server\\controllers\\SecurityHiringController.js"
+                },
+                {
+                    "blank": 16,
+                    "code": 74,
+                    "comment": 0,
+                    "filename": "server\\controllers\\TravelAgencyBookingController.js"
+                },
+                {
+                    "blank": 13,
+                    "code": 62,
+                    "comment": 0,
+                    "filename": "server\\controllers\\travelagencyControllers.js"
+                },
+                {
+                    "blank": 27,
+                    "code": 198,
+                    "comment": 8,
+                    "filename": "server\\controllers\\travelagencyTourController.js"
+                },
+                {
+                    "blank": 14,
+                    "code": 64,
+                    "comment": 0,
+                    "filename": "server\\controllers\\userController.js"
+                },
+                {
+                    "blank": 109,
+                    "code": 264,
+                    "comment": 79,
+                    "filename": "server\\d.txt"
+                },
+                {
+                    "blank": 1,
+                    "code": 10,
+                    "comment": 0,
+                    "filename": "server\\Database\\db.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 7,
+                    "comment": 0,
+                    "filename": "server\\handlers\\cloudinary.js"
+                },
+                {
+                    "blank": 3,
+                    "code": 25,
+                    "comment": 4,
+                    "filename": "server\\handlers\\multer.js"
+                },
+                {
+                    "blank": 8,
+                    "code": 37,
+                    "comment": 3,
+                    "filename": "server\\index.js"
+                },
+                {
+                    "blank": 41,
+                    "code": 261,
+                    "comment": 45,
+                    "filename": "server\\middlewares\\auth.js"
+                },
+                {
+                    "blank": 5,
+                    "code": 26,
+                    "comment": 0,
+                    "filename": "server\\middlewares\\passport.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "server\\middlewares\\roles.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 36,
+                    "comment": 0,
+                    "filename": "server\\models\\GuideHiring.js"
+                },
+                {
+                    "blank": 4,
+                    "code": 47,
+                    "comment": 1,
+                    "filename": "server\\models\\guideTour.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 27,
+                    "comment": 0,
+                    "filename": "server\\models\\review.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 37,
+                    "comment": 0,
+                    "filename": "server\\models\\SecurityHiring.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 34,
+                    "comment": 0,
+                    "filename": "server\\models\\TravelAgencyBooking.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 54,
+                    "comment": 1,
+                    "filename": "server\\models\\TravelAgencytour.js"
+                },
+                {
+                    "blank": 6,
+                    "code": 58,
+                    "comment": 1,
+                    "filename": "server\\models\\users.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 7604,
+                    "comment": 0,
+                    "filename": "server\\package-lock.json"
+                },
+                {
+                    "blank": 0,
+                    "code": 40,
+                    "comment": 0,
+                    "filename": "server\\package.json"
+                },
+                {
+                    "blank": 3,
+                    "code": 17,
+                    "comment": 1,
+                    "filename": "server\\routes\\GuideHiringRoutes.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 28,
+                    "comment": 0,
+                    "filename": "server\\routes\\guidesRoutes.js"
+                },
+                {
+                    "blank": 4,
+                    "code": 34,
+                    "comment": 0,
+                    "filename": "server\\routes\\guidetourRoutes.js"
+                },
+                {
+                    "blank": 3,
+                    "code": 15,
+                    "comment": 0,
+                    "filename": "server\\routes\\reviewRoutes.js"
+                },
+                {
+                    "blank": 4,
+                    "code": 26,
+                    "comment": 0,
+                    "filename": "server\\routes\\securityAgencyRoutes.js"
+                },
+                {
+                    "blank": 3,
+                    "code": 15,
+                    "comment": 0,
+                    "filename": "server\\routes\\SecurityHiringRoutes.js"
+                },
+                {
+                    "blank": 3,
+                    "code": 15,
+                    "comment": 1,
+                    "filename": "server\\routes\\TravelAgencyBookingRoutes.js"
+                },
+                {
+                    "blank": 3,
+                    "code": 26,
+                    "comment": 0,
+                    "filename": "server\\routes\\travelagencyRoutes.js"
+                },
+                {
+                    "blank": 3,
+                    "code": 34,
+                    "comment": 0,
+                    "filename": "server\\routes\\travelAgencyTourRoutes.js"
+                },
+                {
+                    "blank": 3,
+                    "code": 17,
+                    "comment": 0,
+                    "filename": "server\\routes\\userRoutes.js"
+                }
+            ]
         }
     ]
 }

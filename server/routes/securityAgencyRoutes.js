@@ -1,24 +1,36 @@
 const express = require("express");
 const upload = require("../handlers/multer");
+const auth = require("../middlewares/auth");
 
 const router = express.Router();
 
 const {
-  signup,
-  signin,
-  signout,
   read,
   readall,
   update,
-  remove,
 } = require("../controllers/securityagencyController");
 
-router.post("/signup", upload.single("companylicense"), signup);
-router.get("/signin", signin);
-router.get("/signout", signout);
-router.get("/:userID", read);
-router.get("/securityagencies", readall);
-router.patch("/:userID", upload.single("companylicense"), update);
-router.delete("/:userID", remove);
+router.post(
+  "/signup",
+  upload.single("companylicense"),
+  auth.SecurityAgencySignup
+);
+router.get("/signin", auth.signin);
+router.get("/signout", auth.signout);
+router.get("/:id", auth.userAuth, auth.checkRole(["admin"]), read);
+router.get(
+  "/securityagencies",
+  auth.userAuth,
+  auth.checkRole(["admin"]),
+  readall
+);
+router.patch(
+  "/:id",
+  auth.userAuth,
+  auth.checkRole(["admin"]),
+  upload.single("companylicense"),
+  update
+);
+router.delete("/:id", auth.userAuth, auth.checkRole(["admin"]), auth.remove);
 
 module.exports = router;

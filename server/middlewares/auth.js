@@ -1,12 +1,17 @@
-const express = require("express");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+const promisify = require("util").promisify;
+require("../handlers/cloudinary");
+const fs = require("fs");
+const cloudinary = require("cloudinary").v2;
 const passport = require("passport");
-const initializePassport = require("../middlewares/passport");
-
 const User = require("../models/users");
+const Guides = require("../models/users");
+const SecurityAgency = require("../models/users");
+const TravelAgency = require("../models/users");
 
-exports.signup = async (req, res, next) => {
+// User Signup
+exports.UserSignup = async (req, res, next) => {
   try {
     const { firstname, lastname, email, password } = req.body;
 
@@ -21,14 +26,16 @@ exports.signup = async (req, res, next) => {
     }
 
     // Hash the password
+
     const salt = await bcrypt.genSalt(10);
-    const hash = await bcrypt.hash(password, salt);
+
+    const hashedPassword = await bcrypt.hash(password, salt);
 
     const user = new User({
       firstname: req.body.firstname,
       lastname: req.body.lastname,
       email: req.body.email,
-      password: hash,
+      password: hashedPassword,
       role: req.body.role,
     });
 
@@ -44,41 +51,251 @@ exports.signup = async (req, res, next) => {
     res.status(500).json({ message: err.message });
   }
 };
-//sign in
-exports.signin = async (req, res, next) => {
-  const { email, password } = req.body;
+
+//Guide Sign Up
+exports.GuideSignup = async (req, res) => {
   try {
-    const userExist = await User.findOne({ email: email });
-    if (!userExist) {
-      return res.status(404).json({ message: "User does not exist" });
+    let {
+      firstname,
+      lastname,
+      password,
+      email,
+      address,
+      phonenumber,
+      cnic,
+      isAvalaible,
+    } = req.body;
+    if (
+      !firstname ||
+      !lastname ||
+      !password ||
+      !email ||
+      !address ||
+      !phonenumber ||
+      !cnic ||
+      !isAvalaible
+    ) {
+      return res.status(400).send("all fields are required");
     }
 
-    bcrypt.compare(password, userExist.password, (err, isMatch) => {
+    // let userExist = await Guides.findOne({ email: req.body.email });
+    // if (userExist) {
+    //   return res.status(400).send("That user already exisits!");
+    // }
+    //guide avatar and guidelicense upload
+    let avatar = await cloudinary.uploader.upload(req.files.avatar[0].path);
+    let guidelicense = await cloudinary.uploader.upload(
+      req.files.guidelicense[0].path
+    );
+    fs.unlink(req.files.avatar[0].path, (err) => {
       if (err) {
-        return res.status(500).json({ message: err.message });
-      }
-      if (isMatch) {
-        const payload = { id: userExist._id };
-        const token = jwt.sign(payload, process.env.Jwt_Secret, {
-          expiresIn,
-        });
-        return res.status(200).json({ user: userExist, token });
-      } else {
-        return res.status(400).json({ message: "Invalid credentials" });
+        return res.status(500).send(err);
       }
     });
+
+    fs.unlink(req.files.guidelicense[0].path, (err) => {
+      if (err) {
+        return res.status(500).send(err);
+      }
+    });
+    //password hash
+
+    const salt = await bcrypt.genSalt(10);
+    const hash = await bcrypt.hash(password, salt);
+    // Create new guide
+    let guide = new Guides({
+      firstname: req.body.firstname,
+      lastname: req.body.lastname,
+
+      password: hash,
+      email: req.body.email,
+      address: req.body.address,
+      phonenumber: req.body.phonenumber,
+      cnic: req.body.cnic,
+      isAvalaible: req.body.isAvalaible,
+      avatar: avatar.url,
+      guidelicense: guidelicense.url,
+      role: req.body.role,
+    });
+    // Save guide
+    await guide.save();
+    // Create JWT payload
+    const payload = { id: guide._id };
+    const secret = process.env.Jwt_Secret;
+    const expiresIn = process.env.JWT_EXPIRE;
+    const token = jwt.sign(payload, secret, { expiresIn });
+
+    res.status(201).json({ guide, token });
+  } catch (e) {
+    res.status(500).json({ message: e.message });
+  }
+};
+
+//security agency signup
+exports.SecurityAgencySignup = async (req, res) => {
+  try {
+    let { agencyname, password, email, address, phonenumber } = req.body;
+    if (!agencyname || !password || !email || !phonenumber || !address) {
+      return res.status(400).send("all fields are required");
+    }
+
+    //Upload image to cloudinary
+    let result = await cloudinary.uploader.upload(req.file.path);
+    fs.unlink(req.file.path, (err) => {
+      if (err) {
+        console.log(err);
+      }
+    });
+
+    //password hash
+
+    const salt = await bcrypt.genSalt(10);
+    const hash = await bcrypt.hash(password, salt);
+    // Create new user
+    let securityagency = new SecurityAgency({
+      agencyname: req.body.agencyname,
+      password: hash,
+      email: req.body.email,
+      address: req.body.address,
+      phonenumber: req.body.phonenumber,
+      companylicense: result.secure_url,
+      role: req.body.role,
+    });
+    // Save user
+    await securityagency.save();
+    // Create JWT payload
+    const payload = { id: securityagency._id };
+    const secret = process.env.Jwt_Secret;
+    const expiresIn = process.env.JWT_EXPIRE;
+    const token = jwt.sign(payload, secret, { expiresIn });
+
+    securityagency.password = undefined;
+    res.json({ securityagency, token });
   } catch (err) {
-    return res.status(500).json({ message: err.message });
+    res.status(500).json({ message: err.message });
+  }
+};
+
+//travel agency signup
+exports.TravelAgencySignup = async (req, res) => {
+  try {
+    let { agencyname, password, email, address, phonenumber } = req.body;
+    if (!agencyname || !password || !email || !phonenumber || !address) {
+      return res.status(400).send("all fields are required");
+    }
+
+    //Upload image to cloudinary
+    let result = await cloudinary.uploader.upload(req.file.path);
+    fs.unlink(req.file.path, (err) => {
+      if (err) {
+        console.log(err);
+      }
+    });
+
+    const salt = await bcrypt.genSalt(10);
+    const hash = await bcrypt.hash(password, salt);
+
+    // Create new user
+    let travelagency = new TravelAgency({
+      agencyname: req.body.agencyname,
+      password: hash,
+      email: req.body.email,
+      address: req.body.address,
+      phonenumber: req.body.phonenumber,
+      companylicense: result.secure_url,
+      role: req.body.role,
+    });
+    // Save user
+    await travelagency.save();
+
+    // Create JWT payload
+    const payload = { id: travelagency._id };
+    const secret = process.env.Jwt_Secret;
+    const expiresIn = process.env.JWT_EXPIRE;
+    const token = jwt.sign(payload, secret, { expiresIn });
+
+    res.json({ travelagency, token });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+//sign in
+exports.signin = async (req, res) => {
+  try {
+    const user = await User.findOne({ email: req.body.email });
+
+    if (!user) {
+      return res.status(400).json({ message: "Email not found" });
+    }
+    const isMatch = await bcrypt.compare(req.body.password, user.password);
+    if (!isMatch) {
+      return res.status(400).json({ message: "Invalid Credentials" });
+    }
+
+    const payload = { id: user._id };
+    const secret = process.env.Jwt_Secret;
+    const expiresIn = process.env.JWT_EXPIRE;
+    const token = jwt.sign(payload, secret, { expiresIn });
+
+    user.password = undefined;
+
+    res.status(200).json({ user, token: `Bearer ${token}` });
+  } catch (error) {
+    return res.status(500).json({
+      message: "Internal Server Error",
+      error: error.message,
+    });
   }
 };
 
 //signout
 
-exports.signout = (req, res, next) => {
+exports.signout = async (req, res, next) => {
   try {
-    req.logout();
-    return res.status(200).send("logged out");
+    await req.logout();
+    res.status(200).send("logged out");
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
 };
+
+//Read all type of users
+exports.readall = async (req, res, next) => {
+  try {
+    const users = await User.find({});
+
+    if (!users) {
+      return res.status(400).json({ message: "No users found" });
+    }
+    res.status(200).json({ users });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+exports.remove = async (req, res) => {
+  try {
+    const userExist = await User.findById(req.params.id);
+
+    if (!userExist) {
+      return res.status(404).send("guide not found");
+    }
+    await User.findOneAndDelete({
+      _id: req.params.id,
+    });
+
+    res.send("user removed successfully!");
+  } catch (e) {
+    res.status(500).json({ message: e.message });
+  }
+};
+
+//!Passport middleware
+exports.userAuth = passport.authenticate("jwt", { session: false });
+
+//!!ROLE BASED AUTH
+exports.checkRole = (roles) => (req, res, next) =>
+  !roles.includes(req.user.role)
+    ? res.status(401).json("Unauthorized")
+    : next();

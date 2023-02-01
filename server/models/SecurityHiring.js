@@ -7,7 +7,7 @@ const SecurityHiringScehma = mongoose.Schema({
   },
   securityAgency: {
     type: mongoose.Schema.ObjectId,
-    ref: "SecurityAgency",
+    ref: "Users",
     required: true,
   },
   startDate: {
