@@ -1,12 +1,12 @@
 const mongoose = require("mongoose");
 const SecurityHiringScehma = mongoose.Schema({
   user: {
-    type: mongoose.Schema.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: "Users",
     required: true,
   },
   securityAgency: {
-    type: mongoose.Schema.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: "Users",
     required: true,
   },

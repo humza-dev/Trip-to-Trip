@@ -6,17 +6,25 @@ const {
   update,
   remove,
   read,
-  readMe,
+  getMyGuideTours,
+  getMyTours,
+  getMySecurityHirings,
 } = require("../controllers/userController");
+
+router.get(
+  "/my-tours",
+  auth.userAuth,
+  auth.checkRole(["admin", "user"]),
+  getMyGuideTours
+);
+router.get("/my-tours", auth.userAuth);
 
 router.post("/signup", auth.UserSignup);
 router.post("/signin", auth.signin);
 router.get("/signout", auth.signout);
-
-router.get("/", auth.userAuth, auth.checkRole(["admin"]), auth.readall); //get all users
 router.get("/:id", auth.userAuth, auth.checkRole(["admin"]), read);
-router.patch("/:id", auth.userAuth, auth.checkRole(["admin", "user"]), update);
+router.get("/", auth.userAuth, auth.checkRole(["admin"]), auth.readall); //get all users
+router.patch("/:id", auth.userAuth, auth.checkRole(["admin"]), update); //admin update user
 router.delete("/:id", auth.userAuth, auth.checkRole(["admin"]), remove);
-router.get("/me", auth.userAuth, readMe);
 
 module.exports = router;

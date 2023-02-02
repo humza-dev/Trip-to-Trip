@@ -13,7 +13,7 @@ const TravelAgencytourschema = mongoose.Schema({
     required: [true, "duration of tour must be there"],
   },
   travelAgency: {
-    type: mongoose.Schema.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: "Users",
     required: [true, "travel agency name must be there"],
   },

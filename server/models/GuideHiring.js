@@ -6,11 +6,11 @@ const GuideHiringSchema = mongoose.Schema({
     required: true,
   },
   user: {
-    type: mongoose.Schema.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: "Users",
   },
   guide: {
-    type: mongoose.Schema.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: "Users",
     required: true,
   },

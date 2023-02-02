@@ -295,8 +295,10 @@ exports.remove = async (req, res) => {
 //!Passport middleware
 exports.userAuth = passport.authenticate("jwt", { session: false });
 
-//!!ROLE BASED AUTH
+//!ROLE BASED AUTH
 exports.checkRole = (roles) => (req, res, next) =>
   !roles.includes(req.user.role)
-    ? res.status(401).json("Unauthorized")
+    ? res.status(401).json("Unauthorized role")
     : next();
+
+exports.changepassword = async (req, res) => {};

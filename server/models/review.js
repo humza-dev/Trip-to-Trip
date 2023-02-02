@@ -10,12 +10,12 @@ const ReviewModel = mongoose.Schema({
     max: 5,
   },
   tour: {
-    type: mongoose.Schema.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: "Tour",
     rerquired: true,
   },
   user: {
-    type: mongoose.Schema.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: "Users",
   },
   createdAt: {
