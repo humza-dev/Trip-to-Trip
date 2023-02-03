@@ -59,6 +59,7 @@ exports.read = async (req, res) => {
   }
 };
 
+// guide tours
 exports.getMyGuideTours = async (req, res) => {
   try {
     const Hirings = await GuideHiring.find({ user: req.body._id });
@@ -71,9 +72,12 @@ exports.getMyGuideTours = async (req, res) => {
   }
 };
 
+//travel agency booking
+
 exports.getMyTours = async (req, res) => {
   try {
     const Bookings = await TravelAgencyBooking.find({ user: req.body._id });
+
     const bookingIDs = Bookings.map((Booking) => Booking._id);
 
     const bookings = await TravelAgencyBooking.find({
@@ -84,7 +88,7 @@ exports.getMyTours = async (req, res) => {
     res.status(500).send(err);
   }
 };
-
+//secutiry hiring
 exports.getMySecurityHirings = async (req, res) => {
   try {
     const Hirings = await SecurityAgencyHiring.find({ user: req.body._id });

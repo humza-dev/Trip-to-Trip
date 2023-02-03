@@ -298,7 +298,5 @@ exports.userAuth = passport.authenticate("jwt", { session: false });
 //!ROLE BASED AUTH
 exports.checkRole = (roles) => (req, res, next) =>
   !roles.includes(req.user.role)
-    ? res.status(401).json("Unauthorized role")
+    ? res.status(401).json("You are not authorized for this route")
     : next();
-
-exports.changepassword = async (req, res) => {};

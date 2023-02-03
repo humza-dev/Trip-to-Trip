@@ -10,14 +10,27 @@ const {
   getMyTours,
   getMySecurityHirings,
 } = require("../controllers/userController");
-
+//guide tours
 router.get(
-  "/my-tours",
+  "/my-guidetours",
   auth.userAuth,
   auth.checkRole(["admin", "user"]),
   getMyGuideTours
 );
-router.get("/my-tours", auth.userAuth);
+//get travel agency tours
+router.get(
+  "/my-bookings",
+  auth.userAuth,
+  auth.checkRole(["admin", "user"]),
+  getMyTours
+);
+//get user's security hirings
+router.get(
+  "/my-security-hirings",
+  auth.userAuth,
+  auth.checkRole(["admin", "user"]),
+  getMySecurityHirings
+);
 
 router.post("/signup", auth.UserSignup);
 router.post("/signin", auth.signin);
