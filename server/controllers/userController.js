@@ -1,6 +1,5 @@
 const User = require("../models/users");
 const GuideHiring = require("../models/GuideHiring");
-const TravelAgencyBooking = require("../models/TravelAgencyBooking");
 const SecurityAgencyHiring = require("../models/SecurityHiring");
 
 require("../handlers/cloudinary");

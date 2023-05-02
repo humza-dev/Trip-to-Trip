@@ -30,6 +30,7 @@ const userSchmea = new mongoose.Schema(
       minLength: [8, "Password should be greater than 8 characters"],
     },
     address: { type: String },
+    location:{type:String},
     phonenumber: { type: Number, trim: true },
     companylicense: { type: String },
     cnic: {
