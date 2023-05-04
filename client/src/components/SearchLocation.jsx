@@ -11,9 +11,11 @@ const SearchLocation = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div className="flex items-center justify-between mb-4">
-        <label htmlFor="location" className="mr-2 font-bold">
+    <form onSubmit={handleSubmit} className="py-4">
+      
+      <div className="flex items-center flex-col gap-6 mb-10">
+      <div className="flex items-center justify-center gap-4 mb-4 mt-9">
+      <label htmlFor="location" className="mr-2 font-bold">
           Location:
         </label>
         <input
@@ -22,10 +24,8 @@ const SearchLocation = () => {
           value={location}
           onChange={(e) => setLocation(e.target.value)}
           placeholder="Enter location"
-          className="px-4 py-2 border border-gray-400 rounded-lg w-1/2"
+          className="px-4 py-2 border border-gray-400 rounded-lg w-50"
         />
-      </div>
-      <div className="flex items-center justify-between mb-4">
         <label htmlFor="check-in" className="mr-2 font-bold">
           Check-in:
         </label>
@@ -35,7 +35,7 @@ const SearchLocation = () => {
           value={checkIn}
           onChange={(e) => setCheckIn(e.target.value)}
           placeholder="Enter check-in date"
-          className="px-4 py-2 border border-gray-400 rounded-lg w-1/3"
+          className="px-4 py-2 border border-gray-400 rounded-lg w-60"
         />
         <label htmlFor="check-out" className="mr-2 font-bold">
           Check-out:
@@ -46,15 +46,16 @@ const SearchLocation = () => {
           value={checkOut}
           onChange={(e) => setCheckOut(e.target.value)}
           placeholder="Enter check-out date"
-          className="px-4 py-2 border border-gray-400 rounded-lg w-1/3"
+          className="px-4 py-2 border border-gray-400 rounded-lg w-60"
         />
       </div>
       <button
         type="submit"
-        className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg"
+        className="bg-gray-700 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded-lg"
       >
         Search
       </button>
+      </div>
     </form>
   );
 };

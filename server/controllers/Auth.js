@@ -61,24 +61,22 @@ exports.GuideSignup = async (req, res) => {
       address,
       phonenumber,
       cnic,
-      isAvalaible,
       role,
       location,
     } = req.body;
-    if (
-      !firstname ||
-      !lastname ||
-      !password ||
-      !email ||
-      !address ||
-      !phonenumber ||
-      !cnic ||
-      !isAvalaible ||
-      !location ||
-      !role
-    ) {
-      return res.status(400).send("all fields are required");
-    }
+    // if (
+    //   !firstname ||
+    //   !lastname ||
+    //   !password ||
+    //   !email ||
+    //   !address ||
+    //   !phonenumber ||
+    //   !cnic ||
+    //   !location
+
+    // ) {
+    //   return res.status(400).send("all fields are required");
+    // }
 
     let userExist = await Guides.findOne({ email: req.body.email });
     if (userExist) {
@@ -108,7 +106,6 @@ exports.GuideSignup = async (req, res) => {
     let guide = new Guides({
       firstname: req.body.firstname,
       lastname: req.body.lastname,
-
       password: hash,
       email: req.body.email,
       address: req.body.address,
@@ -253,8 +250,13 @@ exports.signin = async (req, res) => {
 // //!Passport middleware
 // exports.userAuth = passport.authenticate("jwt", { session: false });
 
+//islogin
+
+
 // //!ROLE BASED AUTH
-// exports.checkRole = (roles) => (req, res, next) =>
-//   !roles.includes(req.user.role)
-//     ? res.status(401).json("You are not authorized for this route")
-//     : next();
+exports.checkRole = (roles) => (req, res, next) =>
+  !roles.includes(req.user.role)
+    ? res.status(401).json("You are not authorized for this route")
+    : next();
+
+     

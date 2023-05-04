@@ -9,7 +9,7 @@ const userRoutes = require("./routes/userRoutes");
 // const securityagencyRoutes = require("./routes/securityAgencyRoutes");
 // const SecurityHiringRoutes = require("./routes/SecurityHiringRoutes");
  const guidesRoutes = require("./routes/guidesRoutes");
-// const guidetourRoutes = require("./routes/guidetourRoutes");
+ const guidetourRoutes = require("./routes/guidetourRoutes");
 // const GuideHiringRoutes = require("./routes/guideHiringRoutes");
 // const reviewRoutes = require("./routes/reviewRoutes");
 
@@ -33,7 +33,7 @@ app.use("/api", userRoutes);
 // app.use("/api/securityagency", securityagencyRoutes);
 // app.use("/api/securityhiring", SecurityHiringRoutes);
 app.use("/api", guidesRoutes);
-// app.use("/api/guidetour", guidetourRoutes);
+app.use("/api", guidetourRoutes);
 // app.use("/api/guidehiring", GuideHiringRoutes);
 // app.use("/api/review", reviewRoutes);
 
