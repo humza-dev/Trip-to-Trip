@@ -7,7 +7,7 @@ const fs = require("fs");
 exports.createTour = async (req, res) => {
   try {
     let {
-      name,
+      location,
       duration,
       ratingsAverage,
       ratingsQuantity,
@@ -17,21 +17,21 @@ exports.createTour = async (req, res) => {
       startDates,
       startLocation,
       guide,
+      title,
     } = req.body;
-    if (
-      !name ||
-      !duration ||
-      !ratingsAverage ||
-      !ratingsQuantity ||
-      !price ||
-      !summary ||
-      !description ||
-      !startDates ||
-      !startLocation ||
-      !guide
-    ) {
-      return res.status(400).send("all fields are required");
-    }
+    // if (
+    //   !location ||
+    //   !duration ||
+    //   !price ||
+    //   !summary ||
+    //   !title||
+    //   !description ||
+    //   !startDates ||
+    //   !startLocation ||
+    //   !guide
+    // ) {
+    //   return res.status(400).send("all fields are required");
+    // }
 
     //tour images upload
     let imageCover = await cloudinary.uploader.upload(
@@ -63,7 +63,7 @@ exports.createTour = async (req, res) => {
 
     // Create new tour
     let tour = new Tour({
-      name: req.body.name,
+      location: req.body.location,
       duration: req.body.duration,
       ratingsAverage: req.body.ratingsAverage,
       ratingsQuantity: req.body.ratingsQuantity,
@@ -76,6 +76,7 @@ exports.createTour = async (req, res) => {
       image1: image1.secure_url,
       image2: image2.secure_url,
       image3: image3.secure_url,
+      title: req.body.title,
 
       guide: req.body.guide,
     });
@@ -91,7 +92,7 @@ exports.createTour = async (req, res) => {
 exports.updateTour = async (req, res) => {
   try {
     const {
-      name,
+      location,
       duration,
       ratingsAverage,
       ratingsQuantity,
@@ -158,7 +159,7 @@ exports.updateTour = async (req, res) => {
     }
 
     const updatedTour = await Tour.findByIdAndUpdate(req.params.id, {
-      name,
+      location,
       duration,
       ratingsAverage,
       ratingsQuantity,

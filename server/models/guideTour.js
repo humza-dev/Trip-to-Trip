@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const tourSchema = new mongoose.Schema(
   {
-    name: {
+    location: {
       type: String,
       required: true,
       unique: [true, "tour name must be unique"],
@@ -22,6 +22,7 @@ const tourSchema = new mongoose.Schema(
       default: 0,
     },
     price: { type: Number, required: true },
+    title: { type: String, required: true },
     summary: {
       type: String,
       trim: true,

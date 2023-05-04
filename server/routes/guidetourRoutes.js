@@ -13,8 +13,6 @@ const {
 
 router.post(
   "/createtour",
-  auth.userAuth,
-  auth.checkRole(["admin", "guide"]),
   upload.fields([
     { name: "imageCover", maxCount: 1 },
     { name: "image1", maxCount: 1 },
@@ -23,30 +21,30 @@ router.post(
   ]),
   createTour
 );
-router.patch(
-  "/:id",
-  auth.userAuth,
-  auth.checkRole(["admin", "guide"]),
-  upload.fields([
-    { name: "imageCover", maxCount: 1 },
-    { name: "image1", maxCount: 1 },
-    { name: "image2", maxCount: 1 },
-    { name: "image3", maxCount: 1 },
-  ]),
-  updateTour
-);
-router.delete(
-  "/:id",
-  auth.userAuth,
-  auth.checkRole(["admin", "guide"]),
-  remove
-);
-router.get("/:id", auth.userAuth, auth.checkRole(["admin", "guide"]), tourByid);
-router.get(
-  "/guidetours",
-  auth.userAuth,
-  auth.checkRole(["admin", "guide"]),
-  allTours
-);
+// router.patch(
+//   "/:id",
+//   auth.userAuth,
+//   auth.checkRole(["admin", "guide"]),
+//   upload.fields([
+//     { name: "imageCover", maxCount: 1 },
+//     { name: "image1", maxCount: 1 },
+//     { name: "image2", maxCount: 1 },
+//     { name: "image3", maxCount: 1 },
+//   ]),
+//   updateTour
+// );
+// router.delete(
+//   "/:id",
+//   auth.userAuth,
+//   auth.checkRole(["admin", "guide"]),
+//   remove
+// );
+// router.get("/:id", auth.userAuth, auth.checkRole(["admin", "guide"]), tourByid);
+// router.get(
+//   "/guidetours",
+//   auth.userAuth,
+//   auth.checkRole(["admin", "guide"]),
+//   allTours
+// );
 
 module.exports = router;
