@@ -216,7 +216,7 @@ exports.allTours = async (req, res) => {
       const { location } = req.query;
 
   try {
-    const tours = await Tour.find({ location }).populate('guide','firstname');
+    const tours = await Tour.find({ location }).populate('guide','');
     res.json(tours);
   } catch (err) {
     console.error(err);
