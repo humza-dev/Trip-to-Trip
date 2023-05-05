@@ -11,6 +11,7 @@ import About from "./Pages/About";
 import Contact from "./Pages/Contact";
 import MyTours from "./Pages/MyTours";
 import Tours from "./Pages/Tours";
+import TourDetails from "./Pages/TourDetails";
 import SecurityAgencySignup from "./Pages/SecurityAgencySignup";
 function App() {
   return (
@@ -18,19 +19,19 @@ function App() {
       <Navbar />
 
       <Routes>
-      <Route path="/" element={<Home/>} />
+        <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/AboutUs" element={<About />} />
         <Route path="/ContactUs" element={<Contact />} />
 
-        <Route path="/signup" element={<SignupPage/>} />
+        <Route path="/signup" element={<SignupPage />} />
         <Route path="/guidesignup" element={<GuideSignup />} />
         <Route path="/createtour" element={<Tour />} />
         <Route path="/mytours" element={<MyTours />} />
         <Route path="/tours" element={<Tours />} />
+        <Route path="/tourdetails/:id" element={<TourDetails />} />
+
         <Route path="/agencysignup" element={<SecurityAgencySignup />} />
-        
-        
       </Routes>
       <Footer />
     </div>
