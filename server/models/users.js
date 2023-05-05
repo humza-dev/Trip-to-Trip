@@ -15,6 +15,7 @@ const userSchmea = new mongoose.Schema(
       maxlength: 50,
       lowercase: true,
     },
+    companyname: { type: String, trim: true, maxlength: 50, lowercase: true },
     email: {
       type: String,
       trim: true,
@@ -30,7 +31,7 @@ const userSchmea = new mongoose.Schema(
       minLength: [8, "Password should be greater than 8 characters"],
     },
     address: { type: String },
-    location:{type:String},
+    location: { type: String },
     phonenumber: { type: Number, trim: true },
     companylicense: { type: String },
     cnic: {

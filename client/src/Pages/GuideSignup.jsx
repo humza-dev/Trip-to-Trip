@@ -26,18 +26,18 @@ const GuideSignup = () => {
     formData.append("password", password);
     formData.append("avatar", avatar);
     formData.append("guidelicense", guidelicense);
-     formData.append("cnic", cnic);
+    formData.append("cnic", cnic);
     formData.append("location", location);
     formData.append("address", address);
-    formData.append("role",role)
+    formData.append("role", role);
 
     try {
-      const response = await  axios.post(
+      const response = await axios.post(
         "http://localhost:5001/api/guide_join",
         formData,
-        { headers: { "Content-Type": 'multipart/form-data' } }
+        { headers: { "Content-Type": "multipart/form-data" } }
       );
-    
+
       // navigate to the login page after a successful signup
       navigate("/login");
     } catch (e) {

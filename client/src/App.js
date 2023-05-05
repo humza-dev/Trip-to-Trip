@@ -9,6 +9,9 @@ import GuideSignup from "./Pages/GuideSignup";
 import Tour from "./Pages/Tour";
 import About from "./Pages/About";
 import Contact from "./Pages/Contact";
+import MyTours from "./Pages/MyTours";
+import Tours from "./Pages/Tours";
+import SecurityAgencySignup from "./Pages/SecurityAgencySignup";
 function App() {
   return (
     <div>
@@ -23,6 +26,9 @@ function App() {
         <Route path="/signup" element={<SignupPage/>} />
         <Route path="/guidesignup" element={<GuideSignup />} />
         <Route path="/createtour" element={<Tour />} />
+        <Route path="/mytours" element={<MyTours />} />
+        <Route path="/tours" element={<Tours />} />
+        <Route path="/agencysignup" element={<SecurityAgencySignup />} />
         
         
       </Routes>

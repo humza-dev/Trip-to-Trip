@@ -84,6 +84,7 @@ exports.GuideSignup = async (req, res) => {
     }
     //guide avatar and guidelicense upload
     let avatar = await cloudinary.uploader.upload(req.files.avatar[0].path);
+
     let guidelicense = await cloudinary.uploader.upload(
       req.files.guidelicense[0].path
     );
@@ -132,49 +133,67 @@ exports.GuideSignup = async (req, res) => {
 };
 
 // //security agency signup
-// exports.SecurityAgencySignup = async (req, res) => {
-//   try {
-//     let { agencyname, password, email, address, phonenumber } = req.body;
-//     if (!agencyname || !password || !email || !phonenumber || !address) {
-//       return res.status(400).send("all fields are required");
-//     }
+exports.SecurityAgencySignup = async (req, res) => {
+  try {
+    let { companyname, password, email, address, phonenumber,role } = req.body;
+    if (
+      !companyname ||
+      !password ||
+      !email ||
+      !phonenumber ||
+      !address 
+      
+    ) {
+      return res.status(400).send("all fields are required");
+    }
 
-//     //Upload image to cloudinary
-//     let result = await cloudinary.uploader.upload(req.file.path);
-//     fs.unlink(req.file.path, (err) => {
-//       if (err) {
-//         console.log(err);
-//       }
-//     });
+    //Upload image to cloudinary
+    let avatar = await cloudinary.uploader.upload(req.files.avatar[0].path);
 
-//     //password hash
+    let companylicense = await cloudinary.uploader.upload(
+      req.files.companylicense[0].path
+    );
 
-//     const salt = await bcrypt.genSalt(10);
-//     const hash = await bcrypt.hash(password, salt);
-//     // Create new user
-//     let securityagency = new SecurityAgency({
-//       agencyname: req.body.agencyname,
-//       password: hash,
-//       email: req.body.email,
-//       address: req.body.address,
-//       phonenumber: req.body.phonenumber,
-//       companylicense: result.secure_url,
-//       role: req.body.role,
-//     });
-//     // Save user
-//     await securityagency.save();
-//     // Create JWT payload
-//     const payload = { id: securityagency._id };
-//     const secret = process.env.Jwt_Secret;
-//     const expiresIn = process.env.JWT_EXPIRE;
-//     const token = jwt.sign(payload, secret, { expiresIn });
+    fs.unlink(req.files.avatar[0].path, (err) => {
+      if (err) {
+        return res.status(500).json({ message: err.message });
+      }
+    });
+    fs.unlink(req.files.companylicense[0].path, (err) => {
+      if (err) {
+        return res.status(500).json({ message: err.message });
+      }
+    });
 
-//     securityagency.password = undefined;
-//     res.json({ securityagency, token });
-//   } catch (err) {
-//     res.status(500).json({ message: err.message });
-//   }
-// };
+    //password hash
+
+    const salt = await bcrypt.genSalt(10);
+    const hash = await bcrypt.hash(password, salt);
+    // Create new user
+    let securityagency = new User({
+      companyname: req.body.companyname,
+      password: hash,
+      email: req.body.email,
+      address: req.body.address,
+      phonenumber: req.body.phonenumber,
+      companylicense: companylicense.secure_url,
+      avatar: avatar.secure_url,
+      role,
+    });
+    // Save user
+    await securityagency.save();
+    // Create JWT payload
+    const payload = { id: securityagency._id };
+    const secret = process.env.Jwt_Secret;
+    const expiresIn = process.env.JWT_EXPIRE;
+    const token = jwt.sign(payload, secret, { expiresIn });
+
+    securityagency.password = undefined;
+    res.json({ securityagency, token });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
 
 // //sign in
 exports.signin = async (req, res) => {
@@ -250,7 +269,6 @@ exports.signin = async (req, res) => {
 // //!Passport middleware
 // exports.userAuth = passport.authenticate("jwt", { session: false });
 
-//islogin
 
 
 // //!ROLE BASED AUTH
@@ -258,5 +276,3 @@ exports.checkRole = (roles) => (req, res, next) =>
   !roles.includes(req.user.role)
     ? res.status(401).json("You are not authorized for this route")
     : next();
-
-     

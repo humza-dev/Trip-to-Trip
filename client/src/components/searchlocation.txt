@@ -1,0 +1,192 @@
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+
+const SearchLocation = () => {
+  const [cities, setCities] = useState([]); // city location
+  const [searchInput, setSearchInput] = useState("");
+  const navigate = useNavigate();
+  const [checkIn, setCheckIn] = useState("");
+  const [checkOut, setCheckOut] = useState("");
+  // const [selectedCity, setSelectedCity] = useState("");
+
+  useEffect(() => {
+    // async function fetchCities() {
+    //   const response = await axios.get("http://localhost:5001/api/tours");
+    //   setCities(response.data);
+
+    // }
+    // fetchCities();
+    axios.get("http://localhost:5001/api/tours").then((response) => {
+      setCities(response.data);
+    });
+  }, []);
+
+  const handleChange = (event) => {
+    // setSelectedCity(event.target.value);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+  };
+  const handleCitySelect = (event) => {
+    setSearchInput(event.target.value);
+  };
+  const handleSearchSubmit = () => {
+    navigate();
+  };
+
+  return (
+    // <form onSubmit={handleSubmit} className="py-4">
+    //   
+    <div className="align-middle  text-center text-5xl italic  mt-5 ">
+    //     Search your destination
+    //   </div>
+    
+    //   <div className="flex items-center flex-col gap-6 mb-10">
+    //     <div className="flex items-center justify-center gap-4 mb-4 mt-9">
+    //       <label htmlFor="location" className="mr-2 font-bold">
+    //         Location:
+    //       </label>
+    //       <input
+    //         type="text"
+    //         id="location"
+    //         value={cities}
+    //         onChange={handleChange}
+    //         placeholder="Enter location"
+    //         className="px-4 py-2 border border-gray-400 rounded-lg w-50"
+    //       />
+    //       {/* <label htmlFor="check-in" className="mr-2 font-bold">
+    //         Check-in:
+    //       </label>
+    //       <input
+    //         type="date"
+    //         id="check-in"
+    //         value={checkIn}
+    //         onChange={(e) => setCheckIn(e.target.value)}
+    //         placeholder="Enter check-in date"
+    //         className="px-4 py-2 border border-gray-400 rounded-lg w-60"
+    //       />
+    //       <label htmlFor="check-out" className="mr-2 font-bold">
+    //         Check-out:
+    //       </label>
+    //       <input
+    //         type="date"
+    //         id="check-out"
+    //         value={checkOut}
+    //         onChange={(e) => setCheckOut(e.target.value)}
+    //         placeholder="Enter check-out date"
+    //         className="px-4 py-2 border border-gray-400 rounded-lg w-60"
+    //       /> */}
+    //     </div>
+    //     <button
+    //       type="submit"
+    //       className="bg-gray-700 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded-lg"
+    //     >
+    //       Search
+    //     </button>
+    //   </div>
+    // </form>
+    <>
+      {" "}
+      <div className="align-middle  text-center text-5xl italic  mt-5 ">
+        Search your destination
+      </div>
+      <div className="flex items-center flex-col gap-6 mb-10 py-3">
+        <div className="flex items-center justify-center gap-4 mb-4 mt-9">
+          <select
+            onChange={handleCitySelect}
+            className="px-4 py-2 border border-gray-400 rounded-lg w-60"
+          >
+            <option value="" className=" border-red-400 rounded-lg w-60 px-2 py-4 font-xl">Select the City</option>
+            {cities.map((city) => (
+              <option key={city} value={city}>
+                {city}
+              </option>
+            ))}
+          </select>
+          <label htmlFor="check-in" className="mr-2 font-bold">
+            Check-in:
+          </label>
+          <input
+            type="date"
+            id="check-in"
+            value={checkIn}
+            onChange={(e) => setCheckIn(e.target.value)}
+            placeholder="Enter check-in date"
+            className="px-4 py-2 border border-gray-400 rounded-lg w-60"
+          />
+          <label htmlFor="check-out" className="mr-2 font-bold">
+            Check-out:
+          </label>
+          <input
+            type="date"
+            id="check-out"
+            value={checkOut}
+            onChange={(e) => setCheckOut(e.target.value)}
+            placeholder="Enter check-out date"
+            className="px-4 py-2 border border-gray-400 rounded-lg w-60"
+          />
+        </div>
+        <button
+          onClick={handleSearchSubmit}
+          className="bg-gray-700 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded-lg"
+        >
+          Search
+        </button>
+      </div>
+    </>
+  );
+};
+
+export default SearchLocation;
+
+
+
+
+
+
+
+
+
+
+import React,{useState} from 'react'
+import axios from 'axios'
+
+const SearchLocation = () => {
+
+  const [city, setCity] = useState('');
+  const [guides, setGuides] = useState([]);
+
+  const handleSearch = async (e) => {
+    e.preventDefault();
+    const response = await axios.get(`http://localhost:5001/api/tours?location=${city}`);
+    setGuides(response.data);
+    console.log(response.data)
+  };
+  
+  return (
+    <div>
+      <form onSubmit={handleSearch}>
+        <label>
+          Search for guides in a city:
+          <input
+            type="text"
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
+          />
+        </label>
+        <button type="submit">Search</button>
+      </form>
+      <ul>
+        {city.guides.map((guide) => (
+          <li key={guide._id}>
+            <a href={`/guides/${guide._id}`}>{guide.firstname}</a> - {guide.details}-{guide._id}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+export default SearchLocation
