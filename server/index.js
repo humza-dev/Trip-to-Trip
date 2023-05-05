@@ -6,7 +6,7 @@ const bodyparser = require("body-parser");
 const passport = require("passport");
 
 const userRoutes = require("./routes/userRoutes");
-// const securityagencyRoutes = require("./routes/securityAgencyRoutes");
+const securityagencyRoutes = require("./routes/securityAgencyRoutes");
 // const SecurityHiringRoutes = require("./routes/SecurityHiringRoutes");
  const guidesRoutes = require("./routes/guidesRoutes");
  const guidetourRoutes = require("./routes/guidetourRoutes");
@@ -30,7 +30,7 @@ require("./handlers/passport")(passport);
 
 //Routes
 app.use("/api", userRoutes);
-// app.use("/api/securityagency", securityagencyRoutes);
+app.use("/api", securityagencyRoutes);
 // app.use("/api/securityhiring", SecurityHiringRoutes);
 app.use("/api", guidesRoutes);
 app.use("/api", guidetourRoutes);

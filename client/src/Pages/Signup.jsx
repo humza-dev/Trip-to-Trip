@@ -108,6 +108,17 @@ const Signup = () => {
             Sign up as guide
           </a>
         </p>
+       <h3 className="py-3 text-xs font-light text-center text-gray-700">Or</h3>
+        <p className=" text-xs font-light text-center text-gray-700">
+          {" "}
+          Want to register as a Security Agency?{" "}
+          <a
+            href="/agencysignup"
+            className="font-medium text-gray-600 hover:underline"
+          >
+            Sign up as Security Agency
+          </a>
+        </p>
         </div>
       </div>
     </form>

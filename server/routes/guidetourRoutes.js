@@ -40,11 +40,10 @@ router.post(
 //   remove
 // );
 // router.get("/:id", auth.userAuth, auth.checkRole(["admin", "guide"]), tourByid);
-// router.get(
-//   "/guidetours",
-//   auth.userAuth,
-//   auth.checkRole(["admin", "guide"]),
-//   allTours
-// );
+router.get(
+  "/tours",
+
+  allTours
+);
 
 module.exports = router;

@@ -212,19 +212,14 @@ exports.tourByid = async (req, res) => {
 };
 
 exports.allTours = async (req, res) => {
-  try {
-    let guideTours = req.query.guideTours ? req.query.guideTours : "asc";
-    let sortBy = req.query.sortBy ? req.query.sortBy : "_id";
-    let limit = req.query.limit ? parseInt(req.query.limit) : 6;
 
-    const tours = await Tour.find({})
-      .sort([[sortBy, guideTours]])
-      .limit(limit);
-    if (!tours) {
-      res.status(404).send("tours not found");
-    }
-    res.status(200).send(tours);
-  } catch (e) {
-    res.status(500).send();
+      const { location } = req.query;
+
+  try {
+    const tours = await Tour.find({ location }).populate('guide','firstname');
+    res.json(tours);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Server error');
   }
 };
